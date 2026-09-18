@@ -1,682 +1,306 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>كارة ستور - اشتراكات IPTV ومشغلات الوسائط</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root {
-  --primary: #f59e0b;
-  --primary-dark: #d97706;
-  --bg-main: #0f172a;
-  --bg-card: #1e293b;
-  --bg-card-hover: #334155;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --border: #334155;
-  --danger: #ef4444;
-  --success: #22c55e;
-  --radius: 14px;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-body { background: var(--bg-main); color: var(--text-main); min-height: 100vh; overflow-x: hidden; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كارة ستور | Kara Store - مشغلات و IPTV</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --success-color: #22c55e;
+        }
 
-/* شريط الإعلانات العرضي */
-.news-ticker {
-  background: linear-gradient(90deg, #d97706, #f59e0b);
-  color: #000;
-  padding: 8px 15px;
-  font-weight: 700;
-  font-size: 14px;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-}
-.news-ticker span {
-  display: inline-block;
-  animation: newsMove 12s linear infinite;
-}
-@keyframes newsMove {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
 
-/* الهيدر وشريط التنقل */
-header {
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding: 12px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.logo-area i { font-size: 28px; color: var(--primary); }
-.logo-area h1 { font-size: 20px; font-weight: 900; color: #fff; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-.header-actions {
-  display: flex;
-  gap: 10px;
-}
-.header-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  padding: 8px 14px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: 0.2s;
-}
-.header-btn:hover { background: var(--bg-card-hover); border-color: var(--primary); }
-.header-btn.cart-btn { background: var(--primary); color: #000; border: none; }
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-/* الهيرو والترحيب */
-.hero {
-  padding: 40px 20px;
-  text-align: center;
-  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
-  border-bottom: 1px solid var(--border);
-}
-.hero h2 { font-size: 28px; font-weight: 900; margin-bottom: 10px; color: #fff; }
-.hero p { color: var(--text-muted); font-size: 15px; max-width: 600px; margin: 0 auto 20px; }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
 
-/* قسم المنتجات الرئيسي */
-.container { max-width: 1200px; margin: 0 auto; padding: 30px 15px; }
-.section-title {
-  font-size: 22px;
-  font-weight: 900;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #fff;
-  border-right: 4px solid var(--primary);
-  padding-right: 10px;
-}
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
 
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
 
-.product-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: 0.3s;
-}
-.product-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--primary);
-  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.1);
-}
-.product-img {
-  height: 160px;
-  background: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  color: var(--primary);
-  position: relative;
-}
-.product-content {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-.product-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #fff; }
-.product-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 15px; flex-grow: 1; line-height: 1.5; }
-.product-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--border);
-  padding-top: 12px;
-  margin-top: auto;
-}
-.product-price { font-size: 16px; font-weight: 900; color: var(--primary); }
-.add-btn {
-  background: var(--primary);
-  color: #000;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 13px;
-  transition: 0.2s;
-}
-.add-btn:hover { background: var(--primary-dark); color: #fff; }
+        nav a:hover {
+            color: var(--accent-color);
+        }
 
-/* أزرار الخدمات السريعة */
-.quick-tools {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  margin-bottom: 40px;
-}
-.tool-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  padding: 20px;
-  border-radius: var(--radius);
-  text-align: center;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.tool-card:hover { border-color: var(--primary); background: var(--bg-card-hover); }
-.tool-card i { font-size: 28px; color: var(--primary); margin-bottom: 10px; }
-.tool-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 5px; color: #fff; }
-.tool-card p { font-size: 12px; color: var(--text-muted); }
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+            width: 100%;
+        }
 
-/* نافذة السلة والخدمات الجانبية (Modals) */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(5px);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  padding: 15px;
-}
-.modal-overlay.show { display: flex; }
-.modal-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  width: 100%;
-  max-width: 500px;
-  max-height: 90vh;
-  border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.modal-header {
-  padding: 15px 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 700;
-  font-size: 16px;
-}
-.modal-close { background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; }
-.modal-body { padding: 20px; overflow-y: auto; flex-grow: 1; }
-.modal-footer { padding: 15px 20px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); }
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 1rem;
+            background: linear-gradient(to bottom, var(--card-bg), var(--bg-color));
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+        }
 
-/* تفاصيل سلة المشتريات */
-.cart-items-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
-.cart-item-row { display: flex; justify-content: space-between; align-items: center; background: var(--bg-main); padding: 10px; border-radius: 8px; font-size: 14px; }
-.checkout-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background: var(--bg-main);
-  border: 1px solid var(--border);
-  color: #fff;
-  border-radius: 8px;
-  font-size: 14px;
-}
-.checkout-btn {
-  width: 100%;
-  background: #25d366;
-  color: #fff;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
 
-/* تنسيق الخزنة */
-.vault-item { background: var(--bg-main); border: 1px solid var(--border); padding: 12px; border-radius: 8px; margin-bottom: 10px; }
-.vault-item-top { display: flex; justify-content: space-between; margin-bottom: 6px; font-weight: 700; }
-.vault-status { font-size: 12px; padding: 2px 8px; border-radius: 4px; }
-.vault-status.good { background: rgba(34,197,94,0.2); color: var(--success); }
-.vault-status.warning { background: rgba(234,179,8,0.2); color: #eab308; }
-.vault-status.danger { background: rgba(239,68,68,0.2); color: var(--danger); }
-.vault-delete { background: none; border: none; color: var(--danger); font-size: 12px; cursor: pointer; margin-top: 5px; }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-/* توافق الأجهزة */
-.compat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-</style>
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-right: 4px solid var(--accent-color);
+            padding-right: 0.75rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+        }
+
+        .product-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(56, 189, 248, 0.03);
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .product-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-features li::before {
+            content: "✓";
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- شريط الإعلانات -->
-<div class="news-ticker">
-  <span id="newsText">⚡ مرحباً بكم في متجر كارة ستور - الأقوى في عالم اشتراكات الـ IPTV ومشغلات الوسائط الذكية</span>
-</div>
+    <header>
+        <a href="#" class="logo">كارة ستور | Kara Store</a>
+        <nav>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#iptv">المشغلات و IPTV</a></li>
+                <li><a href="#support">الدعم الفني</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<!-- الهيدر -->
-<header>
-  <div class="logo-area">
-    <i class="fa-solid fa-tv"></i>
-    <h1>كارة ستور</h1>
-  </div>
-  <div class="header-actions">
-    <button class="header-btn" onclick="openVault()"><i class="fa-solid fa-vault"></i> الخزنة</button>
-    <button class="header-btn cart-btn" onclick="openCart()"><i class="fa-solid fa-cart-shopping"></i> السلة (<span id="cartCount">0</span>)</button>
-  </div>
-</header>
+    <main>
+        <section class="hero">
+            <h1>عالم المشغلات وخدمات IPTV</h1>
+            <p>أفضل اشتراكات البث وتطبيقات التشغيل الذكية بجودة عالية ودعم فني متواصل على مدار الساعة.</p>
+        </section>
 
-<!-- الهيرو -->
-<section class="hero">
-  <h2>عالم البث الرقمي واشتراكات الـ IPTV</h2>
-  <p>احصل على أقوى سيرفرات البث والمشغلات بجودة عالية ودعم فني مستمر.</p>
-</section>
+        <section id="iptv">
+            <h2 class="section-title">قسم المشغلات و IPTV</h2>
+            <div class="products-grid">
+                
+                <!-- منتج 1 -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-title">اشتراك 4K IPTV المميز</div>
+                        <span class="product-badge">الأكثر مبيعاً</span>
+                    </div>
+                    <div class="product-body">
+                        <ul class="product-features">
+                            <li>أكثر من 8,000 قناة بث مباشر</li>
+                            <li>مكتبة ضخمة ومتجددة من الأفلام والمسلسلات</li>
+                            <li>دعم جودات متعددة (SD, HD, FHD, 4K)</li>
+                            <li>تشغيل سلس بدون تقطيع</li>
+                        </ul>
+                        <button class="btn">اطلب الاشتراك الآن</button>
+                    </div>
+                </div>
 
-<!-- المحتوى الرئيسي -->
-<div class="container">
+                <!-- منتج 2 -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-title">تفعيل مشغل الوسائط السريع</div>
+                        <span class="product-badge">تفعيل فوري</span>
+                    </div>
+                    <div class="product-body">
+                        <ul class="product-features">
+                            <li>تفعيل رسمي لتطبيق المشغل الذكي</li>
+                            <li>واجهة استخدام عصرية وسهلة</li>
+                            <li>دعم تشغيل القوائم المخصصة M3U / Xtream</li>
+                            <li>تحديثات مستمرة وتوافق مع كافة الأجهزة</li>
+                        </ul>
+                        <button class="btn">تفعيل التطبيق</button>
+                    </div>
+                </div>
 
-  <!-- الأدوات السريعة -->
-  <div class="quick-tools">
-    <div class="tool-card" onclick="openDeviceTest()">
-      <i class="fa-solid fa-mobile-screen-button"></i>
-      <h3>اختبار توافق الجهاز</h3>
-      <p>تعرف على التطبيق المناسب لشاشتك أو هاتفك</p>
-    </div>
-    <div class="tool-card" onclick="openVault()">
-      <i class="fa-solid fa-shield-halved"></i>
-      <h3>خزنة الاشتراكات</h3>
-      <p>تابع مواعيد انتهاء اشتراكاتك بسهولة</p>
-    </div>
-  </div>
+                <!-- منتج 3 -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-title">باقة العائلة المتكاملة</div>
+                        <span class="product-badge">عروض خاصة</span>
+                    </div>
+                    <div class="product-body">
+                        <ul class="product-features">
+                            <li>إمكانية التشغيل على عدة أجهزة في نفس الوقت</li>
+                            <li>قنوات أطفال آمنة ومتنوعة</li>
+                            <li>أحدث الإصدارات السينمائية تزامناً مع العرض</li>
+                            <li>دعم فني مخصص لإعداد الأجهزة المنزلية</li>
+                        </ul>
+                        <button class="btn">اشترك الآن</button>
+                    </div>
+                </div>
 
-  <div class="section-title">
-    <i class="fa-solid fa-satellite-dish"></i> اشتراكات IPTV ومشغلات الوسائط
-  </div>
+            </div>
+        </section>
+    </main>
 
-  <!-- قائمة منتجات الـ IPTV والمشغلات مع الأسعار -->
-  <div class="products-grid">
-
-    <div class="product-card" data-category="iptv">
-      <div class="product-img"><i class="fa-solid fa-fire"></i></div>
-      <div class="product-content">
-        <div class="product-title">اشتراك MAX TV Pro</div>
-        <div class="product-desc">أقوى سيرفر بث للقنوات الرياضية والترفيهية بجودة عالية وعدد ضخم من الأفلام والمسلسلات.</div>
-        <div class="product-footer">
-          <div class="product-price">15,000 د.ع</div>
-          <button class="add-btn" onclick="addToCart('اشتراك MAX TV Pro', 15000)">إضافة للسلة</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card" data-category="iptv">
-      <div class="product-img"><i class="fa-solid fa-bolt"></i></div>
-      <div class="product-content">
-        <div class="product-title">اشتراك TIGER IPTV</div>
-        <div class="product-desc">ثبات عالي بدون تقطيع، يضم مكتبة ضخمة متجددة يومياً تناسب كافة الأجهزة والسرعات.</div>
-        <div class="product-footer">
-          <div class="product-price">12,000 د.ع</div>
-          <button class="add-btn" onclick="addToCart('اشتراك TIGER IPTV', 12000)">إضافة للسلة</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card" data-category="iptv">
-      <div class="product-img"><i class="fa-solid fa-film"></i></div>
-      <div class="product-content">
-        <div class="product-title">اشتراك Dream OTT</div>
-        <div class="product-desc">تجربة مشاهدة متميزة للبث الحي وأحدث اصدارات السينما العالمية مترجمة.</div>
-        <div class="product-footer">
-          <div class="product-price">10,000 د.ع</div>
-          <button class="add-btn" onclick="addToCart('اشتراك Dream OTT', 10000)">إضافة للسلة</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card" data-category="iptv">
-      <div class="product-img"><i class="fa-solid fa-tv"></i></div>
-      <div class="product-content">
-        <div class="product-title">تفعيل مشغل IBO / BOB / X Player</div>
-        <div class="product-desc">تفعيل مدى الحياة أو لفترة محددة لأشهر تطبيقات مشغلات الشاشات الذكية Smart TV.</div>
-        <div class="product-footer">
-          <div class="product-price">5,000 د.ع</div>
-          <button class="add-btn" onclick="addToCart('تفعيل مشغل IBO / BOB', 5000)">إضافة للسلة</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card" data-category="iptv">
-      <div class="product-img"><i class="fa-solid fa-circle-play"></i></div>
-      <div class="product-content">
-        <div class="product-title">اشتراك تجريبي (Test)</div>
-        <div class="product-desc">جرّب الخدمة والسيرفرات بنفسك قبل الشراء والتثبيت النهائي لمدة 24 ساعة.</div>
-        <div class="product-footer">
-          <div class="product-price">1,000 د.ع</div>
-          <button class="add-btn" onclick="addToCart('اشتراك تجريبي 24 ساعة', 1000)">إضافة للسلة</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- نافذة سلة المشتريات -->
-<div class="modal-overlay" id="cartOverlay">
-  <div class="modal-box">
-    <div class="modal-header">
-      <span>سلة المشتريات</span>
-      <button class="modal-close" onclick="closeCart()"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="modal-body">
-      <div id="cartItemsList" class="cart-items-list"></div>
-      <div style="margin-top: 15px;">
-        <input type="text" id="customerNameInput" class="checkout-input" placeholder="اسمك الكريم...">
-        <input type="text" id="customerPhoneInput" class="checkout-input" placeholder="رقم الهاتف (اختياري)...">
-      </div>
-    </div>
-    <div class="modal-footer">
-      <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: 700;">
-        <span>المجموع الكلي:</span>
-        <span id="cartTotalPrice" style="color: var(--primary);">0 د.ع</span>
-      </div>
-      <button class="checkout-btn" onclick="sendToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> إتمام الطلب عبر الواتساب</button>
-    </div>
-  </div>
-</div>
-
-<!-- نافذة خزنة الاشتراكات -->
-<div class="modal-overlay" id="vaultOverlay">
-  <div class="modal-box">
-    <div class="modal-header">
-      <span>خزنة الاشتراكات الخاصة بك</span>
-      <button class="modal-close" onclick="closeVault()"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="modal-body">
-      <div style="margin-bottom: 15px; background: var(--bg-main); padding: 12px; border-radius: 8px;">
-        <h4 style="font-size: 14px; margin-bottom: 8px; color: var(--primary);">إضافة اشتراك جديد للخزنة</h4>
-        <input type="text" id="vaultName" class="checkout-input" placeholder="اسم الاشتراك (مثال: MAX TV)">
-        <select id="vaultDuration" class="checkout-input">
-          <option value="">اختر مدة الاشتراك</option>
-          <option value="1">شهر واحد</option>
-          <option value="3">3 أشهر</option>
-          <option value="6">6 أشهر</option>
-          <option value="12">سنة كاملة</option>
-        </select>
-        <input type="date" id="vaultStartDate" class="checkout-input">
-        <input type="date" id="vaultExpiryDate" class="checkout-input" style="display:none;">
-        <input type="text" id="vaultNote" class="checkout-input" placeholder="ملاحظات (مثل: بيانات الكود أو المستخدم)">
-        <button class="add-btn" style="width:100%; padding:10px;" onclick="addSubscription()">حفظ في الخزنة</button>
-      </div>
-      <div id="vaultList"></div>
-    </div>
-  </div>
-</div>
-
-<!-- نافذة اختبار توافق الجهاز -->
-<div class="modal-overlay" id="deviceOverlay">
-  <div class="modal-box">
-    <div class="modal-header">
-      <span>اختبار توافق الجهاز</span>
-      <button class="modal-close" onclick="closeDeviceTest()"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="modal-body">
-      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">اختر نوع جهازك لمعرفة التطبيقات المتوافقة معه:</p>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
-        <button class="header-btn" style="justify-content:center;" onclick="testDevice('mobile', this)">📱 موبايل</button>
-        <button class="header-btn" style="justify-content:center;" onclick="testDevice('smart', this)">📺 شاشة ذكية</button>
-        <button class="header-btn" style="justify-content:center;" onclick="testDevice('box', this)">📦 أندرويد بوكس</button>
-        <button class="header-btn" style="justify-content:center;" onclick="testDevice('pc', this)">💻 كمبيوتر</button>
-      </div>
-      <div id="compatResult" style="display:none; background: var(--bg-main); padding: 12px; border-radius: 8px;">
-        <h4 id="compatTitle" style="font-size: 14px; color: var(--primary); margin-bottom: 8px;"></h4>
-        <div id="compatList"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-let cart = [];
-let subscriptions = JSON.parse(localStorage.getItem("carah_vault")) || [];
-const WHATSAPP_NUMBER = "9647700000000"; // استبدل برقم الواتساب الخاص بك
-
-function esc(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-
-function addToCart(name, price) {
-  const found = cart.find(item => item.name === name);
-  if (found) {
-    found.qty++;
-  } else {
-    cart.push({ name, price, qty: 1 });
-  }
-  updateCartUI();
-  alert("✅ تمت إضافة \"" + name + "\" إلى السلة بنجاح.");
-}
-
-function updateCartUI() {
-  const countEl = document.getElementById("cartCount");
-  const listEl = document.getElementById("cartItemsList");
-  const totalEl = document.getElementById("cartTotalPrice");
-
-  const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-  if(countEl) countEl.textContent = totalCount;
-
-  if(!listEl) return;
-
-  if (cart.length === 0) {
-    listEl.innerHTML = `<div style="text-align:center; color: var(--text-muted); padding: 20px;">السلة فارغة حالياً</div>`;
-    if(totalEl) totalEl.textContent = "0 د.ع";
-    return;
-  }
-
-  let total = 0;
-  listEl.innerHTML = cart.map((item, index) => {
-    let itemTotal = item.price * item.qty;
-    total += itemTotal;
-    return `
-      <div class="cart-item-row">
-        <div>
-          <strong>${esc(item.name)}</strong><br>
-          <small style="color: var(--text-muted);">${item.price} د.ع × ${item.qty}</small>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span>${itemTotal} د.ع</span>
-          <button onclick="removeFromCart(${index})" style="background:none; border:none; color:var(--danger); cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-        </div>
-      </div>
-    `;
-  }).join("");
-
-  if(totalEl) totalEl.textContent = total + " د.ع";
-}
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  updateCartUI();
-}
-
-function openCart() {
-  updateCartUI();
-  document.getElementById("cartOverlay").classList.add("show");
-  document.body.style.overflow = "hidden";
-}
-
-function closeCart() {
-  document.getElementById("cartOverlay").classList.remove("show");
-  document.body.style.overflow = "";
-}
-
-function sendToWhatsApp() {
-  if (cart.length === 0) {
-    alert("⚠️ السلة فارغة، يرجى إضافة خدمات أولاً.");
-    return;
-  }
-  const nameInput = document.getElementById("customerNameInput").value.trim();
-  const phoneInput = document.getElementById("customerPhoneInput").value.trim();
-
-  let msg = "مرحباً، أريد طلب الخدمات التالية من كارة ستور:\n\n";
-  let total = 0;
-  cart.forEach(item => {
-    let sub = item.price * item.qty;
-    total += sub;
-    msg += `- ${item.name} (العدد: ${item.qty}) - ${sub} د.ع\n`;
-  });
-  msg += `\nالمجموع الكلي: ${total} د.ع`;
-  if(nameInput) msg += `\nالاسم: ${nameInput}`;
-  if(phoneInput) msg += `\nالهاتف: ${phoneInput}`;
-
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(msg), "_blank");
-}
-
-function saveSubscriptions() {
-  localStorage.setItem("carah_vault", JSON.stringify(subscriptions));
-  renderVault();
-}
-
-function openVault() {
-  renderVault();
-  document.getElementById("vaultOverlay").classList.add("show");
-  document.body.style.overflow = "hidden";
-}
-
-function closeVault() {
-  document.getElementById("vaultOverlay").classList.remove("show");
-  document.body.style.overflow = "";
-}
-
-const vaultDurationSelect = document.getElementById("vaultDuration");
-if(vaultDurationSelect) {
-  vaultDurationSelect.onchange = function() {
-    const val = this.value;
-    const expInput = document.getElementById("vaultExpiryDate");
-    const startInput = document.getElementById("vaultStartDate");
-    if(val) {
-      let d = new Date(startInput.value || new Date());
-      d.setMonth(d.getMonth() + Number(val));
-      expInput.value = d.toISOString().split("T")[0];
-    }
-  };
-}
-
-const vaultStartInput = document.getElementById("vaultStartDate");
-if(vaultStartInput) {
-  vaultStartInput.value = new Date().toISOString().split("T")[0];
-}
-
-function addSubscription() {
-  const name = document.getElementById("vaultName").value.trim();
-  const durationType = document.getElementById("vaultDuration").value;
-  const start = document.getElementById("vaultStartDate").value;
-  let expiry = document.getElementById("vaultExpiryDate").value;
-  const note = document.getElementById("vaultNote").value.trim();
-
-  if(!name || !durationType || !start) {
-    alert("⚠️ يرجى ملء الحقول الأساسية للاشتراك");
-    return;
-  }
-
-  subscriptions.push({ id: Date.now(), name, start, expiry, note });
-  document.getElementById("vaultName").value = "";
-  document.getElementById("vaultNote").value = "";
-  saveSubscriptions();
-  alert("🔐 تمت إضافة الاشتراك إلى الخزنة بنجاح");
-}
-
-function deleteSubscription(id) {
-  if(confirm("هل تريد حذف هذا الاشتراك؟")) {
-    subscriptions = subscriptions.filter(s => s.id !== id);
-    saveSubscriptions();
-  }
-}
-
-function renderVault() {
-  const list = document.getElementById("vaultList");
-  if(!list) return;
-  if(!subscriptions.length) {
-    list.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:15px;">الخزنة فارغة حالياً</div>`;
-    return;
-  }
-  const now = new Date();
-  list.innerHTML = subscriptions.map(s => {
-    const exp = new Date(s.expiryDate);
-    const diff = Math.ceil((exp - now) / (1000 * 60 * 60 * 24));
-    let statusText = diff < 0 ? `منتهي منذ ${Math.abs(diff)} يوم` : `ساري (${diff} يوم متبقي)`;
-    let statusClass = diff < 0 ? "danger" : (diff <= 5 ? "warning" : "good");
-
-    return `
-      <div class="vault-item">
-        <div class="vault-item-top">
-          <span>${esc(s.name)}</span>
-          <span class="vault-status ${statusClass}">${statusText}</span>
-        </div>
-        <div style="font-size:12px; color:var(--text-muted);">الانتهاء: ${s.expiryDate}</div>
-        ${s.note ? `<div style="font-size:12px; margin-top:4px;">ملاحظة: ${esc(s.note)}</div>` : ""}
-        <button class="vault-delete" onclick="deleteSubscription(${s.id})">حذف</button>
-      </div>
-    `;
-  }).join("");
-}
-
-function openDeviceTest() {
-  document.getElementById("deviceOverlay").classList.add("show");
-  document.body.style.overflow = "hidden";
-}
-function closeDeviceTest() {
-  document.getElementById("deviceOverlay").classList.remove("show");
-  document.body.style.overflow = "";
-}
-
-function testDevice(type, btn) {
-  const resultBox = document.getElementById("compatResult");
-  const titleEl = document.getElementById("compatTitle");
-  const listEl = document.getElementById("compatList");
-  resultBox.style.display = "block";
-
-  let title = "";
-  let services = [];
-
-  if(type === "mobile") {
-    title = "📱 التطبيقات المناسبة للموبايل (Android / iOS):";
-    services = [{name: "MAX TV & TIGER", note: "متوفر عبر تطبيقات مخصصة"}];
-  } else if(type === "smart") {
-    title = "📺 التطبيقات المناسبة للشاشات الذكية (Smart TV):";
-    services = [{name: "IBO / BOB / X Player", note: "تعمل بكفاءة عالية على شاشات Samsung و LG"}];
-  } else if(type === "box") {
-    title = "📦 أجهزة الأندرويد بوكس (Android Box):";
-    services = [{name: "تطبيقات Downloader", note: "تدعم التثبيت المباشر لكافة السيرفرات"}];
-  } else if(type === "pc") {
-    title = "💻 الكمبيوتر (PC):";
-    services = [{name: "مشغلات الويب", note: "تدعم التشغيل المباشر عبر المتصفح"}];
-  }
-
-  titleEl.textContent = title;
-  listEl.innerHTML = services.map(s => `<div class="compat-row"><span>${esc(s.name)}</span><b>${esc(s.note)}</b></div>`).join("");
-}
-</script>
+    <footer>
+        <p>جميع الحقوق محفوظة لصالح كارة ستور &copy; 2026</p>
+    </footer>
 
 </body>
 </html>
