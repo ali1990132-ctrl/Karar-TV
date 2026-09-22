@@ -3,304 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كارة ستور | Kara Store - مشغلات و IPTV</title>
+    <title>القالب النهائي - كارة ستور</title>
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #38bdf8;
-            --accent-hover: #0ea5e9;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --success-color: #22c55e;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: #121212;
+            color: #ffffff;
+            padding-bottom: 70px; /* مسافة للشريط السفلي المثبت */
         }
-
         header {
-            background-color: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--accent-color);
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            flex: 1;
-            width: 100%;
-        }
-
-        .hero {
+            background: #1f1f1f;
+            padding: 15px;
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 3rem 1rem;
-            background: linear-gradient(to bottom, var(--card-bg), var(--bg-color));
-            border-radius: 1rem;
-            border: 1px solid var(--border-color);
+            border-bottom: 1px solid #333;
         }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-color);
+        header h1 {
+            color: #ff9800;
+            font-size: 1.5rem;
         }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+        .container {
+            padding: 15px;
             max-width: 600px;
             margin: 0 auto;
         }
-
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            border-right: 4px solid var(--accent-color);
-            padding-right: 0.75rem;
+            font-size: 1.1rem;
+            margin: 15px 0 10px;
+            color: #ff9800;
+            border-right: 3px solid #ff9800;
+            padding-right: 8px;
         }
-
-        .products-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
-
-        .product-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s, border-color 0.2s;
+        .card {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #2d2d2d;
+            transition: 0.2s;
         }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-color);
+        .card:hover {
+            border-color: #ff9800;
         }
-
-        .product-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(56, 189, 248, 0.03);
-        }
-
-        .product-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-badge {
-            display: inline-block;
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--accent-color);
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .product-body {
-            padding: 1.5rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .product-features li {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .product-features li::before {
-            content: "✓";
-            color: var(--success-color);
-            font-weight: bold;
-        }
-
-        .btn {
-            display: block;
+        /* الشريط السفلي المثبت */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            font-weight: bold;
-            text-align: center;
+            background: #1a1a1a;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+        .nav-item {
+            color: #fff;
             text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
-        }
-
-        footer {
-            background-color: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            padding: 1.5rem;
-            color: var(--text-muted);
             font-size: 0.9rem;
-            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            nav ul {
-                gap: 1rem;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
+        .nav-item.cart-btn {
+            color: #ff9800;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo">كارة ستور | Kara Store</a>
-        <nav>
-            <ul>
-                <li><a href="#">الرئيسية</a></li>
-                <li><a href="#iptv">المشغلات و IPTV</a></li>
-                <li><a href="#support">الدعم الفني</a></li>
-            </ul>
-        </nav>
+        <h1>كارة ستور</h1>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1>عالم المشغلات وخدمات IPTV</h1>
-            <p>أفضل اشتراكات البث وتطبيقات التشغيل الذكية بجودة عالية ودعم فني متواصل على مدار الساعة.</p>
-        </section>
-
-        <section id="iptv">
-            <h2 class="section-title">قسم المشغلات و IPTV</h2>
-            <div class="products-grid">
-                
-                <!-- منتج 1 -->
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-title">اشتراك 4K IPTV المميز</div>
-                        <span class="product-badge">الأكثر مبيعاً</span>
-                    </div>
-                    <div class="product-body">
-                        <ul class="product-features">
-                            <li>أكثر من 8,000 قناة بث مباشر</li>
-                            <li>مكتبة ضخمة ومتجددة من الأفلام والمسلسلات</li>
-                            <li>دعم جودات متعددة (SD, HD, FHD, 4K)</li>
-                            <li>تشغيل سلس بدون تقطيع</li>
-                        </ul>
-                        <button class="btn">اطلب الاشتراك الآن</button>
-                    </div>
-                </div>
-
-                <!-- منتج 2 -->
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-title">تفعيل مشغل الوسائط السريع</div>
-                        <span class="product-badge">تفعيل فوري</span>
-                    </div>
-                    <div class="product-body">
-                        <ul class="product-features">
-                            <li>تفعيل رسمي لتطبيق المشغل الذكي</li>
-                            <li>واجهة استخدام عصرية وسهلة</li>
-                            <li>دعم تشغيل القوائم المخصصة M3U / Xtream</li>
-                            <li>تحديثات مستمرة وتوافق مع كافة الأجهزة</li>
-                        </ul>
-                        <button class="btn">تفعيل التطبيق</button>
-                    </div>
-                </div>
-
-                <!-- منتج 3 -->
-                <div class="product-card">
-                    <div class="product-header">
-                        <div class="product-title">باقة العائلة المتكاملة</div>
-                        <span class="product-badge">عروض خاصة</span>
-                    </div>
-                    <div class="product-body">
-                        <ul class="product-features">
-                            <li>إمكانية التشغيل على عدة أجهزة في نفس الوقت</li>
-                            <li>قنوات أطفال آمنة ومتنوعة</li>
-                            <li>أحدث الإصدارات السينمائية تزامناً مع العرض</li>
-                            <li>دعم فني مخصص لإعداد الأجهزة المنزلية</li>
-                        </ul>
-                        <button class="btn">اشترك الآن</button>
-                    </div>
-                </div>
-
+    <div class="container">
+        <div class="section-title">المنتجات المتاحة</div>
+        <div class="grid">
+            <div class="card">
+                <h3>اشتراك مميز</h3>
+                <p>وصف المنتج هنا</p>
             </div>
-        </section>
-    </main>
+            <div class="card">
+                <h3>خدمة أخرى</h3>
+                <p>وصف المنتج هنا</p>
+            </div>
+        </div>
+    </div>
 
-    <footer>
-        <p>جميع الحقوق محفوظة لصالح كارة ستور &copy; 2026</p>
-    </footer>
+    <!-- الشريط السفلي المثبت ويحتوي على السلة -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item">الرئيسية</a>
+        <a href="#" class="nav-item">الطلبات</a>
+        <button class="nav-item cart-btn">
+            🛒 السلة
+        </button>
+        <a href="#" class="nav-item">حسابي</a>
+    </nav>
 
 </body>
 </html>
