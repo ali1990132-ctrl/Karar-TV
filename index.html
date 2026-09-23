@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#060810">
 <title>كارة ستور | Kara Store</title>
 
@@ -13,11 +13,15 @@
   --card2:#11182a;
   --accent:#9147ff;
   --pink:#ff2d88;
+  --green:#25d366;
+  --gold:#ffb020;
+  --cyan:#06b6d4;
+  --blue:#3b82f6;
+  --red:#ef4444;
   --text:#fff;
   --muted:#9da8bd;
   --line:rgba(255,255,255,.08);
-  --green:#25d366;
-  --gold:#ffb020;
+  --glass:rgba(13,18,32,.78);
 }
 
 *{
@@ -32,19 +36,15 @@ html{
 body{
   margin:0;
   background:
-    radial-gradient(circle at 20% 0%,rgba(145,71,255,.12),transparent 30%),
-    radial-gradient(circle at 90% 20%,rgba(255,45,136,.08),transparent 28%),
+    radial-gradient(circle at 10% 0%,rgba(145,71,255,.18),transparent 30%),
+    radial-gradient(circle at 90% 15%,rgba(255,45,136,.12),transparent 28%),
     var(--bg);
   color:var(--text);
-  font-family:Arial,Tahoma,sans-serif;
-  max-width:520px;
-  margin:auto;
+  font-family:Tahoma,Arial,sans-serif;
   min-height:100vh;
 }
 
-button,
-input,
-select{
+button,input,select{
   font-family:inherit;
 }
 
@@ -52,242 +52,326 @@ button{
   cursor:pointer;
 }
 
+.app{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  padding-bottom:95px;
+}
+
 /* HEADER */
-header{
+.header{
   position:sticky;
   top:0;
-  z-index:50;
-  padding:12px;
-  background:rgba(6,8,16,.86);
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 14px;
+  background:rgba(6,8,16,.82);
   backdrop-filter:blur(18px);
   border-bottom:1px solid var(--line);
 }
 
-.header-inner{
+.logo{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
+  gap:9px;
+  font-weight:900;
+  font-size:18px;
 }
 
-.logo{
-  font-size:22px;
-  font-weight:1000;
+.logo-icon{
+  width:38px;
+  height:38px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--pink),var(--accent));
+  box-shadow:0 0 25px rgba(145,71,255,.35);
 }
 
-.logo span{
-  color:var(--pink);
+.header-actions{
+  display:flex;
+  gap:8px;
 }
 
-.cart-btn{
-  border:1px solid rgba(145,71,255,.35);
-  background:rgba(145,71,255,.13);
+.icon-btn{
+  position:relative;
+  width:42px;
+  height:42px;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:white;
+  border-radius:13px;
+  font-size:18px;
+}
+
+.cart-count{
+  position:absolute;
+  top:-5px;
+  left:-5px;
+  min-width:19px;
+  height:19px;
+  padding:0 5px;
+  border-radius:20px;
+  background:var(--pink);
   color:#fff;
-  border-radius:14px;
-  padding:10px 14px;
+  font-size:11px;
+  display:grid;
+  place-items:center;
   font-weight:900;
 }
 
-/* HERO VIDEO */
-.hero-video{
+/* HERO */
+.hero{
   position:relative;
+  margin:12px;
   height:360px;
-  margin:16px 12px;
-  border:1px solid var(--line);
-  border-radius:24px;
+  border-radius:25px;
   overflow:hidden;
-  background:#000;
-  isolation:isolate;
-  box-shadow:0 15px 50px rgba(0,0,0,.45);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
 }
 
-.hero-video iframe{
+.hero iframe{
   position:absolute;
-  top:50%;
-  left:50%;
+  inset:0;
   width:100%;
   height:100%;
-  min-width:177.78%;
-  min-height:100%;
-  transform:translate(-50%,-50%);
   border:0;
   pointer-events:none;
+  transform:scale(1.25);
 }
 
 .hero-overlay{
   position:absolute;
   inset:0;
-  z-index:2;
   background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.18) 0%,
-      rgba(0,0,0,.36) 45%,
-      rgba(0,0,0,.82) 100%
-    );
-  pointer-events:none;
+    linear-gradient(to top,rgba(6,8,16,.98) 0%,rgba(6,8,16,.62) 42%,rgba(6,8,16,.18) 100%);
 }
 
 .hero-content{
   position:absolute;
-  inset:0;
-  z-index:3;
+  inset:auto 18px 18px;
+  z-index:2;
+}
+
+.hero-badge{
+  display:inline-flex;
+  padding:7px 12px;
+  border-radius:30px;
+  background:rgba(255,176,32,.14);
+  border:1px solid rgba(255,176,32,.35);
+  color:#ffd36b;
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:29px;
+  line-height:1.2;
+}
+
+.hero p{
+  color:#d6d9e2;
+  line-height:1.7;
+  margin:0 0 13px;
+  font-size:13px;
+}
+
+.hero-actions{
   display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:25px 18px;
-  pointer-events:none;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-.hero-content h1{
-  margin:0 0 10px;
-  font-size:36px;
-  font-weight:1000;
-  text-shadow:0 5px 25px rgba(0,0,0,.8);
+.btn{
+  border:0;
+  border-radius:13px;
+  padding:11px 14px;
+  color:white;
+  font-weight:900;
+  font-size:12px;
 }
 
-.hero-content p{
-  margin:0;
-  max-width:420px;
-  line-height:1.8;
-  color:rgba(255,255,255,.88);
-  font-weight:700;
-  text-shadow:0 3px 15px #000;
+.btn-primary{
+  background:linear-gradient(135deg,var(--pink),var(--accent));
+  box-shadow:0 8px 25px rgba(145,71,255,.25);
 }
 
-.trial{
-  margin-top:18px;
-  padding:12px 18px;
-  border-radius:15px;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.18);
-  backdrop-filter:blur(12px);
-  font-weight:1000;
-  box-shadow:0 8px 30px rgba(0,0,0,.3);
+.btn-dark{
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.12);
 }
 
-/* SOUND BUTTON */
 .sound-btn{
   position:absolute;
-  bottom:14px;
-  left:14px;
-  z-index:10;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.58);
-  backdrop-filter:blur(12px);
+  left:12px;
+  top:12px;
+  z-index:4;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(0,0,0,.45);
   color:#fff;
-  border-radius:14px;
-  padding:10px 14px;
-  font-size:13px;
-  font-weight:1000;
-  box-shadow:0 5px 20px rgba(0,0,0,.4);
+  padding:8px 11px;
+  border-radius:12px;
+  backdrop-filter:blur(10px);
+  font-size:11px;
 }
 
-.sound-btn:active{
-  transform:scale(.96);
-}
-
-/* CONTACT BUTTONS */
-.contact-box{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  padding:0 12px 16px;
-}
-
-.contact-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  min-height:50px;
-  text-decoration:none;
-  color:#fff;
+/* PROMO */
+.promo-strip{
+  margin:12px;
+  overflow:hidden;
   border-radius:15px;
-  font-weight:1000;
+  background:linear-gradient(90deg,rgba(145,71,255,.16),rgba(255,45,136,.12));
   border:1px solid var(--line);
-  transition:.2s;
 }
 
-.contact-btn:active{
-  transform:scale(.97);
+.promo-track{
+  white-space:nowrap;
+  display:inline-block;
+  padding:10px 0;
+  animation:marquee 18s linear infinite;
+  color:#ddd;
+  font-size:12px;
+  font-weight:800;
 }
 
-.whatsapp{
-  background:rgba(37,211,102,.14);
-  border-color:rgba(37,211,102,.28);
+.promo-track span{
+  margin:0 25px;
 }
 
-.group{
-  background:rgba(145,71,255,.14);
-  border-color:rgba(145,71,255,.30);
-}
-
-/* INFO */
-.info{
-  margin:0 12px 16px;
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:rgba(255,255,255,.035);
-  text-align:center;
-}
-
-.info-title{
-  font-weight:1000;
-  margin-bottom:7px;
-}
-
-.info-text{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.8;
-}
-
-/* TABS */
-.tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  padding:0 12px 15px;
-}
-
-.tab{
-  border:1px solid var(--line);
-  background:var(--card);
-  color:#fff;
-  border-radius:14px;
-  padding:12px;
-  font-weight:1000;
-}
-
-.tab.active{
-  background:linear-gradient(135deg,var(--accent),var(--pink));
-  border-color:transparent;
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(50%)}
 }
 
 /* SECTION */
 .section{
-  padding:0 12px 25px;
+  padding:10px 12px;
 }
 
 .section-title{
   display:flex;
-  align-items:center;
+  align-items:end;
   justify-content:space-between;
-  margin:8px 0 14px;
+  margin:8px 2px 13px;
 }
 
 .section-title h2{
   margin:0;
-  font-size:20px;
+  font-size:19px;
 }
 
 .section-title span{
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
+}
+
+/* SEARCH */
+.search-box{
+  position:relative;
+  margin-bottom:12px;
+}
+
+.search-box input{
+  width:100%;
+  padding:15px 45px 15px 14px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  outline:none;
+  background:var(--card);
+  color:#fff;
+  font-size:13px;
+}
+
+.search-box input:focus{
+  border-color:rgba(145,71,255,.65);
+  box-shadow:0 0 0 3px rgba(145,71,255,.08);
+}
+
+.search-icon{
+  position:absolute;
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:18px;
+}
+
+/* CATEGORIES */
+.categories{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:5px;
+  scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+  display:none;
+}
+
+.cat{
+  flex:0 0 auto;
+  padding:9px 14px;
+  border-radius:30px;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:#bfc7d8;
+  font-size:11px;
+  font-weight:900;
+}
+
+.cat.active{
+  background:linear-gradient(135deg,var(--accent),var(--pink));
+  color:white;
+  border-color:transparent;
+}
+
+/* MOST REQUESTED */
+.featured{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.featured::-webkit-scrollbar{
+  display:none;
+}
+
+.feature-card{
+  min-width:180px;
+  background:linear-gradient(145deg,#151c2e,#0c101c);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:14px;
+}
+
+.feature-icon{
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:rgba(145,71,255,.14);
+  font-size:25px;
+  margin-bottom:10px;
+}
+
+.feature-card strong{
+  display:block;
+  font-size:13px;
+}
+
+.feature-card small{
+  color:var(--muted);
+  display:block;
+  margin-top:5px;
+  font-size:10px;
 }
 
 /* PRODUCTS */
@@ -297,244 +381,454 @@ header{
 }
 
 .product{
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.015)),
-    var(--card);
+  position:relative;
+  overflow:hidden;
   border:1px solid var(--line);
   border-radius:20px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.035),transparent),
+    var(--card);
   padding:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,.18);
+  transition:.25s;
+}
+
+.product:hover{
+  transform:translateY(-2px);
+  border-color:rgba(145,71,255,.35);
 }
 
 .product-top{
   display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:10px;
+  gap:12px;
+  align-items:center;
+}
+
+.product-icon{
+  width:58px;
+  height:58px;
+  flex:0 0 58px;
+  display:grid;
+  place-items:center;
+  border-radius:17px;
+  background:linear-gradient(145deg,#171f34,#090d18);
+  border:1px solid var(--line);
+  font-size:28px;
+}
+
+.product-info{
+  min-width:0;
+  flex:1;
 }
 
 .product-name{
-  font-size:18px;
-  font-weight:1000;
+  font-size:15px;
+  font-weight:900;
 }
 
 .product-desc{
   margin-top:5px;
   color:var(--muted);
-  font-size:12px;
+  font-size:10px;
+  line-height:1.6;
 }
 
 .badge{
-  background:rgba(255,176,32,.13);
-  color:var(--gold);
-  border:1px solid rgba(255,176,32,.22);
-  border-radius:10px;
-  padding:6px 8px;
-  font-size:10px;
-  font-weight:1000;
+  display:inline-block;
+  padding:4px 7px;
+  border-radius:7px;
+  background:rgba(255,45,136,.13);
+  color:#ff78ad;
+  font-size:9px;
+  font-weight:900;
+  margin-top:6px;
 }
 
-.prices{
+.product-controls{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:6px;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
   margin-top:13px;
 }
 
-.price{
-  background:var(--card2);
+.duration-select{
+  width:100%;
   border:1px solid var(--line);
-  border-radius:11px;
-  padding:9px 4px;
-  text-align:center;
-}
-
-.price small{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  margin-bottom:3px;
-}
-
-.price b{
-  font-size:12px;
-}
-
-.product-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-  margin-top:12px;
-}
-
-.add-btn,
-.details-btn{
-  border:0;
+  background:#090e19;
+  color:#fff;
   border-radius:12px;
   padding:11px 8px;
-  font-weight:1000;
+  outline:none;
+  font-size:11px;
 }
 
-.add-btn{
-  color:#fff;
-  background:linear-gradient(135deg,var(--accent),var(--pink));
-}
-
-.details-btn{
-  color:#fff;
-  background:rgba(255,255,255,.07);
-  border:1px solid var(--line);
-}
-
-/* CART */
-.cart-panel{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(8px);
-}
-
-.cart-panel.show{
-  display:flex;
-  align-items:flex-end;
-}
-
-.cart-box{
-  width:100%;
-  max-width:520px;
-  margin:auto;
-  max-height:90vh;
-  overflow:auto;
-  background:#0a0f1b;
-  border-radius:25px 25px 0 0;
-  border:1px solid var(--line);
-  padding:18px;
-}
-
-.cart-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-.cart-head h3{
-  margin:0;
-}
-
-.close{
-  width:38px;
-  height:38px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.06);
-  color:#fff;
-  border-radius:12px;
-}
-
-.cart-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.cart-item-name{
+.price{
+  margin-top:9px;
+  font-size:18px;
   font-weight:900;
 }
 
-.cart-item-price{
-  color:#fff;
-  font-weight:1000;
+.price small{
+  color:var(--muted);
+  font-size:10px;
 }
 
-.remove{
-  border:0;
-  background:rgba(255,45,136,.12);
-  color:#ff6ba8;
-  border-radius:9px;
-  padding:6px 8px;
-}
-
-.total{
-  display:flex;
-  justify-content:space-between;
-  margin:18px 0;
-  font-size:18px;
-  font-weight:1000;
-}
-
-/* FORM */
-.form{
+.product-buttons{
   display:grid;
-  gap:10px;
-}
-
-.form input,
-.form select{
-  width:100%;
-  padding:13px;
-  border-radius:13px;
-  border:1px solid var(--line);
-  outline:none;
-  background:var(--card2);
-  color:#fff;
-}
-
-.form input::placeholder{
-  color:#758096;
-}
-
-.payments{
-  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:7px;
   margin-top:10px;
 }
 
-.payment{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.035);
-  border-radius:12px;
-  padding:11px;
+.product-buttons button,
+.product-buttons a{
+  text-decoration:none;
+  text-align:center;
+  border:0;
+  border-radius:11px;
+  padding:10px 6px;
+  font-size:10px;
+  font-weight:900;
   color:#fff;
-  font-size:12px;
 }
 
 .order-btn{
-  width:100%;
-  border:0;
-  margin-top:12px;
-  padding:14px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#25d366,#128c7e);
-  color:#fff;
-  font-weight:1000;
-  font-size:15px;
+  background:linear-gradient(135deg,var(--pink),var(--accent));
 }
 
-/* FOOTER */
-footer{
-  padding:25px 12px 35px;
+.cart-btn{
+  background:#182238;
+  border:1px solid var(--line)!important;
+}
+
+.details-btn{
+  background:rgba(255,255,255,.06);
+}
+
+.download-btn{
+  background:rgba(6,182,212,.13);
+  color:#67e8f9!important;
+}
+
+.downloader{
+  margin-top:8px;
+  padding:8px;
+  border-radius:10px;
+  background:rgba(255,176,32,.07);
+  color:#ffd36b;
   text-align:center;
+  font-size:10px;
+  font-weight:900;
+}
+
+/* DEVICES */
+.devices{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.device{
+  padding:13px 7px;
+  border-radius:15px;
+  background:var(--card);
+  border:1px solid var(--line);
+  text-align:center;
+}
+
+.device-icon{
+  font-size:21px;
+  margin-bottom:5px;
+}
+
+.device span{
+  font-size:10px;
+  color:#d5dae5;
+}
+
+/* WHY */
+.why-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.why{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:14px;
+}
+
+.why b{
+  display:block;
+  margin-bottom:5px;
+  font-size:12px;
+}
+
+.why span{
   color:var(--muted);
+  font-size:10px;
+  line-height:1.6;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(8px);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:520px;
+  max-height:88vh;
+  overflow:auto;
+  background:#0b101c;
+  border:1px solid var(--line);
+  border-radius:25px 25px 0 0;
+  padding:18px;
+  animation:up .25s ease;
+}
+
+@keyframes up{
+  from{transform:translateY(100%)}
+  to{transform:translateY(0)}
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px;
+}
+
+.modal-head h3{
+  margin:0;
+}
+
+.close{
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:white;
+}
+
+.detail-box{
+  padding:15px;
+  border-radius:17px;
+  background:var(--card);
+  border:1px solid var(--line);
+  line-height:1.9;
+  font-size:12px;
+  color:#d9dce5;
+}
+
+/* CART */
+.cart-items{
+  display:grid;
+  gap:9px;
+}
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  border-radius:15px;
+  background:var(--card);
+  border:1px solid var(--line);
+}
+
+.cart-item-info{
+  flex:1;
+}
+
+.cart-item strong{
+  font-size:12px;
+}
+
+.cart-item small{
+  display:block;
+  color:var(--muted);
+  margin-top:4px;
+  font-size:9px;
+}
+
+.cart-price{
+  font-weight:900;
+  font-size:12px;
+}
+
+.delete{
+  border:0;
+  background:rgba(239,68,68,.1);
+  color:#ff7d7d;
+  width:34px;
+  height:34px;
+  border-radius:10px;
+}
+
+.total-box{
+  margin-top:13px;
+  padding:15px;
+  border-radius:17px;
+  background:linear-gradient(135deg,rgba(145,71,255,.13),rgba(255,45,136,.08));
+  border:1px solid rgba(145,71,255,.2);
+}
+
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  font-weight:900;
+}
+
+.form-group{
+  margin-top:10px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:6px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.form-group input,
+.form-group select{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  background:#080c16;
+  color:#fff;
+  border:1px solid var(--line);
+  outline:none;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position:fixed;
+  z-index:200;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:520px;
+  padding:8px 9px calc(8px + env(safe-area-inset-bottom));
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+  background:rgba(7,10,18,.9);
+  backdrop-filter:blur(20px);
+  border-top:1px solid var(--line);
+}
+
+.nav-item{
+  border:0;
+  background:transparent;
+  color:#7f899d;
+  padding:7px 3px;
+  border-radius:12px;
+  font-size:9px;
+  font-weight:900;
+}
+
+.nav-item span{
+  display:block;
+  font-size:18px;
+  margin-bottom:3px;
+}
+
+.nav-item.active{
+  color:#fff;
+  background:rgba(145,71,255,.12);
+}
+
+/* FLOATING */
+.float{
+  position:fixed;
+  z-index:250;
+  bottom:95px;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  text-decoration:none;
+  font-size:23px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  animation:float 2.5s ease-in-out infinite;
+}
+
+.float-wa{
+  left:15px;
+  background:var(--green);
+}
+
+.float-group{
+  right:15px;
+  background:linear-gradient(135deg,var(--accent),var(--pink));
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+/* EMPTY */
+.empty{
+  text-align:center;
+  padding:30px 15px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  z-index:1000;
+  bottom:90px;
+  left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:#171e2d;
+  border:1px solid var(--line);
+  color:#fff;
+  padding:11px 16px;
+  border-radius:13px;
   font-size:11px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
 /* RESPONSIVE */
-@media(max-width:390px){
-  .hero-video{
-    height:320px;
+@media(max-width:380px){
+  .hero{
+    height:330px;
   }
 
-  .hero-content h1{
-    font-size:30px;
+  .hero h1{
+    font-size:25px;
   }
 
-  .prices{
-    grid-template-columns:repeat(2,1fr);
+  .product-buttons{
+    grid-template-columns:1fr 1fr;
   }
 }
 </style>
@@ -542,417 +836,407 @@ footer{
 
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">كارة <span>ستور</span></div>
-    <button class="cart-btn" onclick="openCart()">
-      🛒 السلة <span id="cartCount">0</span>
+<div class="app">
+
+<header class="header">
+  <div class="logo">
+    <div class="logo-icon">👑</div>
+    <div>كارة ستور</div>
+  </div>
+
+  <div class="header-actions">
+    <button class="icon-btn" onclick="openCart()">
+      🛒
+      <span class="cart-count" id="cartCount">0</span>
     </button>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero-video">
+<section class="hero" id="home">
 
   <iframe
     id="heroVideo"
     src="https://www.youtube.com/embed/EflGlmkVkNE?autoplay=1&mute=1&loop=1&playlist=EflGlmkVkNE&controls=0&playsinline=1&rel=0&enablejsapi=1"
-    title="Kara Store"
-    frameborder="0"
-    allow="autoplay; encrypted-media; picture-in-picture"
-    allowfullscreen>
+    allow="autoplay; encrypted-media">
   </iframe>
 
   <div class="hero-overlay"></div>
 
-  <div class="hero-content">
-    <h1>كارة ستور</h1>
-
-    <p>
-      خدمات IPTV والمشغلات بمكان واحد —
-      تفاصيل الاشتراك، التحميل، Downloader والطلب عبر واتساب.
-    </p>
-
-    <div class="trial">
-      🎁 تجربة الخدمة بـ 1000 د.ع
-    </div>
-  </div>
-
-  <button
-    id="soundBtn"
-    class="sound-btn"
-    onclick="toggleVideoSound()">
+  <button class="sound-btn" id="soundBtn" onclick="toggleVideoSound()">
     🔇 تشغيل الصوت
   </button>
 
+  <div class="hero-content">
+
+    <div class="hero-badge">
+      🎁 تجربة الخدمة بـ 1000 د.ع
+    </div>
+
+    <h1>أهلاً بكم في كارة ستور 👑</h1>
+
+    <p>
+      جميع خدماتك الإلكترونية بمكان واحد —
+      اشتراكات، IPTV، مشغلات، خدمات رقمية وأكثر.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="scrollToProducts()">
+        🔥 مشاهدة الخدمات
+      </button>
+
+      <a
+        class="btn btn-dark"
+        href="https://wa.me/9647711608207"
+        target="_blank">
+        💬 تواصل معنا
+      </a>
+    </div>
+
+  </div>
 </section>
 
-<!-- CONTACT -->
-<div class="contact-box">
-
-  <a
-    class="contact-btn whatsapp"
-    href="https://wa.me/9647711608207"
-    target="_blank">
-    📲 واتساب
-  </a>
-
-  <a
-    class="contact-btn group"
-    href="https://chat.whatsapp.com/E6Os9QbQTrUJR9MGCCsr6K?s=cl&p=a&mlu=4&ilr=4"
-    target="_blank">
-    👥 كروب واتساب
-  </a>
-
-</div>
-
-<div class="info">
-  <div class="info-title">📲 للتفعيل وتجديد الاشتراك</div>
-  <div class="info-text">
-    راسلنا على الواتساب<br>
-    <strong style="color:#25d366;font-size:16px">07711608207</strong>
+<div class="promo-strip">
+  <div class="promo-track">
+    <span>🔥 كارة ستور</span>
+    <span>⚡ تفعيل سريع</span>
+    <span>📺 جميع الأجهزة</span>
+    <span>💬 دعم واتساب</span>
+    <span>🎁 تجربة الخدمة</span>
+    <span>👑 خدمة احترافية</span>
   </div>
 </div>
 
-<!-- TABS -->
-<div class="tabs">
-  <button id="iptvTab" class="tab active" onclick="showCategory('iptv')">
-    📺 اشتراكات IPTV
-  </button>
-
-  <button id="playersTab" class="tab" onclick="showCategory('players')">
-    ▶️ المشغلات
-  </button>
-</div>
-
-<!-- IPTV -->
-<section class="section" id="iptvSection">
+<section class="section">
 
   <div class="section-title">
-    <h2>📺 اشتراكات IPTV</h2>
-    <span>اختر الاشتراك المناسب</span>
+    <h2>🔎 ابحث عن خدمتك</h2>
+    <span id="resultCount"></span>
   </div>
 
-  <div class="products">
+  <div class="search-box">
+    <span class="search-icon">🔎</span>
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="ابحث عن منتج أو خدمة داخل المتجر..."
+      oninput="filterProducts()">
+  </div>
 
-    <!-- KARA -->
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">👑 كارة ستور TV</div>
-          <div class="product-desc">اشتراك كارة ستور TV</div>
-        </div>
-        <div class="badge">KARA TV</div>
-      </div>
+  <div class="categories">
 
-      <div class="prices">
-        <div class="price">
-          <small>6 أشهر</small>
-          <b>15,000</b>
-        </div>
-        <div class="price">
-          <small>السنة</small>
-          <b>25,000</b>
-        </div>
-      </div>
+    <button class="cat active" data-category="all">
+      ✨ الكل
+    </button>
 
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('كارة ستور TV - 6 أشهر',15000)">
-          🛒 أضف
-        </button>
-        <button class="details-btn" onclick="quickOrder('كارة ستور TV')">
-          💬 طلب
-        </button>
-      </div>
-    </div>
+    <button class="cat" data-category="iptv">
+      📺 IPTV
+    </button>
 
-    <!-- ALMOATAMAD -->
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">📺 المعتمد TV</div>
-          <div class="product-desc">اشتراك المعتمد TV</div>
-        </div>
-        <div class="badge">TV</div>
-      </div>
+    <button class="cat" data-category="player">
+      ▶️ المشغلات
+    </button>
 
-      <div class="prices">
-        <div class="price"><small>شهر</small><b>5,000</b></div>
-        <div class="price"><small>3 أشهر</small><b>10,000</b></div>
-        <div class="price"><small>6 أشهر</small><b>15,000</b></div>
-        <div class="price"><small>سنة</small><b>25,000</b></div>
-      </div>
-
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('المعتمد TV - شهر',5000)">🛒 شهر</button>
-        <button class="details-btn" onclick="quickOrder('المعتمد TV')">💬 طلب</button>
-      </div>
-    </div>
-
-    <!-- DREAM -->
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">🎬 Dream OTT</div>
-          <div class="product-desc">اشتراك Dream OTT</div>
-        </div>
-        <div class="badge">DREAM</div>
-      </div>
-
-      <div class="prices">
-        <div class="price"><small>شهر</small><b>5,000</b></div>
-        <div class="price"><small>3 أشهر</small><b>10,000</b></div>
-        <div class="price"><small>6 أشهر</small><b>15,000</b></div>
-        <div class="price"><small>سنة</small><b>20,000</b></div>
-      </div>
-
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('Dream OTT - شهر',5000)">🛒 شهر</button>
-        <button class="details-btn" onclick="quickOrder('Dream OTT')">💬 طلب</button>
-      </div>
-    </div>
-
-    <!-- MAX -->
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">🔥 MAX TV</div>
-          <div class="product-desc">اشتراك MAX TV</div>
-        </div>
-        <div class="badge">MAX</div>
-      </div>
-
-      <div class="prices">
-        <div class="price"><small>شهر</small><b>5,000</b></div>
-        <div class="price"><small>3 أشهر</small><b>10,000</b></div>
-        <div class="price"><small>6 أشهر</small><b>15,000</b></div>
-        <div class="price"><small>سنة</small><b>25,000</b></div>
-      </div>
-
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('MAX TV - شهر',5000)">🛒 شهر</button>
-        <button class="details-btn" onclick="quickOrder('MAX TV')">💬 طلب</button>
-      </div>
-    </div>
-
-    <!-- AM -->
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">📡 AM TV</div>
-          <div class="product-desc">اشتراك AM TV</div>
-        </div>
-        <div class="badge">AM TV</div>
-      </div>
-
-      <div class="prices">
-        <div class="price"><small>شهر</small><b>5,000</b></div>
-        <div class="price"><small>3 أشهر</small><b>10,000</b></div>
-        <div class="price"><small>6 أشهر</small><b>15,000</b></div>
-        <div class="price"><small>سنة</small><b>25,000</b></div>
-      </div>
-
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('AM TV - شهر',5000)">🛒 شهر</button>
-        <button class="details-btn" onclick="quickOrder('AM TV')">💬 طلب</button>
-      </div>
-    </div>
-
-    <!-- TIGER -->
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">🐯 TIGER IPTV</div>
-          <div class="product-desc">اشتراك TIGER IPTV</div>
-        </div>
-        <div class="badge">TIGER</div>
-      </div>
-
-      <div class="prices">
-        <div class="price"><small>شهر</small><b>5,000</b></div>
-        <div class="price"><small>3 أشهر</small><b>10,000</b></div>
-        <div class="price"><small>6 أشهر</small><b>15,000</b></div>
-        <div class="price"><small>سنة</small><b>20,000</b></div>
-      </div>
-
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('TIGER IPTV - شهر',5000)">🛒 شهر</button>
-        <button class="details-btn" onclick="quickOrder('TIGER IPTV')">💬 طلب</button>
-      </div>
-    </div>
+    <button class="cat" data-category="offers">
+      🔥 العروض
+    </button>
 
   </div>
+
 </section>
 
-<!-- PLAYERS -->
-<section class="section" id="playersSection" style="display:none">
+<section class="section" id="featuredSection">
 
   <div class="section-title">
-    <h2>▶️ المشغلات</h2>
-    <span>للأجهزة المدعومة</span>
+    <h2>🔥 الأكثر طلباً</h2>
+    <span>اختيارات العملاء</span>
   </div>
 
-  <div class="products">
+  <div class="featured">
 
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">▶️ IBO PLAYER</div>
-          <div class="product-desc">مشغل IBO PLAYER</div>
-        </div>
-        <div class="badge">IBO</div>
-      </div>
-
-      <div class="prices">
-        <div class="price"><small>شهر</small><b>5,000</b></div>
-        <div class="price"><small>3 أشهر</small><b>10,000</b></div>
-        <div class="price"><small>6 أشهر</small><b>15,000</b></div>
-        <div class="price"><small>سنة</small><b>20,000</b></div>
-      </div>
-
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('IBO PLAYER - شهر',5000)">🛒 أضف</button>
-        <button class="details-btn" onclick="quickOrder('IBO PLAYER')">💬 طلب</button>
-      </div>
+    <div class="feature-card" onclick="focusProduct('kara')">
+      <div class="feature-icon">👑</div>
+      <strong>كارة ستور TV</strong>
+      <small>اشتراك IPTV متكامل</small>
     </div>
 
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">▶️ BOB PLAYER</div>
-          <div class="product-desc">مشغل BOB PLAYER</div>
-        </div>
-        <div class="badge">BOB</div>
-      </div>
-
-      <div class="prices">
-        <div class="price"><small>شهر</small><b>5,000</b></div>
-        <div class="price"><small>3 أشهر</small><b>10,000</b></div>
-        <div class="price"><small>6 أشهر</small><b>15,000</b></div>
-        <div class="price"><small>سنة</small><b>20,000</b></div>
-      </div>
-
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('BOB PLAYER - شهر',5000)">🛒 أضف</button>
-        <button class="details-btn" onclick="quickOrder('BOB PLAYER')">💬 طلب</button>
-      </div>
+    <div class="feature-card" onclick="focusProduct('max')">
+      <div class="feature-icon">🎬</div>
+      <strong>MAX TV</strong>
+      <small>أفلام ومسلسلات ورياضة</small>
     </div>
 
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">▶️ X PLAYER</div>
-          <div class="product-desc">مشغل X PLAYER</div>
-        </div>
-        <div class="badge">X</div>
-      </div>
-
-      <div class="prices">
-        <div class="price"><small>شهر</small><b>5,000</b></div>
-        <div class="price"><small>3 أشهر</small><b>10,000</b></div>
-        <div class="price"><small>6 أشهر</small><b>15,000</b></div>
-        <div class="price"><small>سنة</small><b>20,000</b></div>
-      </div>
-
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('X PLAYER - شهر',5000)">🛒 أضف</button>
-        <button class="details-btn" onclick="quickOrder('X PLAYER')">💬 طلب</button>
-      </div>
+    <div class="feature-card" onclick="focusProduct('tiger')">
+      <div class="feature-icon">🐯</div>
+      <strong>TIGER IPTV</strong>
+      <small>مشاهدة وترفيه</small>
     </div>
 
-    <div class="product">
-      <div class="product-top">
-        <div>
-          <div class="product-name">▶️ HOT PLAYER</div>
-          <div class="product-desc">مشغل HOT</div>
-        </div>
-        <div class="badge">HOT</div>
-      </div>
-
-      <div class="prices">
-        <div class="price"><small>شهر</small><b>5,000</b></div>
-        <div class="price"><small>3 أشهر</small><b>10,000</b></div>
-        <div class="price"><small>6 أشهر</small><b>15,000</b></div>
-        <div class="price"><small>سنة</small><b>20,000</b></div>
-      </div>
-
-      <div class="product-actions">
-        <button class="add-btn" onclick="addProduct('HOT PLAYER - شهر',5000)">🛒 أضف</button>
-        <button class="details-btn" onclick="quickOrder('HOT PLAYER')">💬 طلب</button>
-      </div>
+    <div class="feature-card" onclick="focusProduct('dream')">
+      <div class="feature-icon">🌙</div>
+      <strong>Dream OTT</strong>
+      <small>خدمة OTT</small>
     </div>
 
   </div>
 </section>
 
-<!-- CART -->
-<div id="cartPanel" class="cart-panel" onclick="closeCartOutside(event)">
-  <div class="cart-box">
+<section class="section" id="productsSection">
 
-    <div class="cart-head">
+  <div class="section-title">
+    <h2>📦 خدمات كارة ستور</h2>
+    <span>اختر المدة المناسبة</span>
+  </div>
+
+  <div class="products" id="products"></div>
+
+</section>
+
+<section class="section">
+
+  <div class="section-title">
+    <h2>📱 الأجهزة المدعومة</h2>
+    <span>شاهد من جهازك</span>
+  </div>
+
+  <div class="devices">
+
+    <div class="device">
+      <div class="device-icon">📺</div>
+      <span>LG</span>
+    </div>
+
+    <div class="device">
+      <div class="device-icon">📺</div>
+      <span>Samsung</span>
+    </div>
+
+    <div class="device">
+      <div class="device-icon">📺</div>
+      <span>Hisense</span>
+    </div>
+
+    <div class="device">
+      <div class="device-icon">🤖</div>
+      <span>Android TV</span>
+    </div>
+
+    <div class="device">
+      <div class="device-icon">🌐</div>
+      <span>Google TV</span>
+    </div>
+
+    <div class="device">
+      <div class="device-icon">📱</div>
+      <span>Android</span>
+    </div>
+
+    <div class="device">
+      <div class="device-icon">🍎</div>
+      <span>iPhone</span>
+    </div>
+
+    <div class="device">
+      <div class="device-icon">📱</div>
+      <span>iPad</span>
+    </div>
+
+    <div class="device">
+      <div class="device-icon">💻</div>
+      <span>Laptop</span>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+
+  <div class="section-title">
+    <h2>✨ لماذا كارة ستور؟</h2>
+    <span>خدمة • سرعة • ثقة</span>
+  </div>
+
+  <div class="why-grid">
+
+    <div class="why">
+      <b>⚡ تفعيل سريع</b>
+      <span>استلام طلبك ومتابعته بسرعة عبر واتساب.</span>
+    </div>
+
+    <div class="why">
+      <b>🛡️ خدمة موثوقة</b>
+      <span>تنظيم واضح للخدمات والمدد والأسعار.</span>
+    </div>
+
+    <div class="why">
+      <b>📱 جميع الأجهزة</b>
+      <span>دعم مجموعة واسعة من الأجهزة والشاشات.</span>
+    </div>
+
+    <div class="why">
+      <b>💬 دعم واتساب</b>
+      <span>تواصل مباشر للتفعيل والتجديد والاستفسار.</span>
+    </div>
+
+    <div class="why">
+      <b>🎁 تجربة الخدمة</b>
+      <span>إمكانية تجربة الخدمة حسب العرض المتاح.</span>
+    </div>
+
+    <div class="why">
+      <b>🔄 تجديد سهل</b>
+      <span>اختر الخدمة والمدة وأرسل الطلب مباشرة.</span>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section" id="contact">
+
+  <div class="product" style="text-align:center">
+
+    <div style="font-size:30px">👑</div>
+
+    <h2 style="margin:8px 0">كارة ستور TV</h2>
+
+    <p style="color:var(--muted);font-size:11px;line-height:1.8">
+      للتفعيل وتجديد الاشتراك تواصل معنا على الواتساب
+    </p>
+
+    <a
+      class="btn btn-primary"
+      style="display:inline-block;text-decoration:none"
+      href="https://wa.me/9647711608207"
+      target="_blank">
+      💬 07711608207
+    </a>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<a
+  class="float float-wa"
+  href="https://wa.me/9647711608207"
+  target="_blank"
+  aria-label="واتساب">
+  💬
+</a>
+
+<!-- FLOATING GROUP -->
+<a
+  class="float float-group"
+  href="https://chat.whatsapp.com/E6Os9QbQTrUJR9MGCCsr6K?s=cl&p=a&mlu=4&ilr=4"
+  target="_blank"
+  aria-label="كروب واتساب">
+  👥
+</a>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+
+  <button class="nav-item active" onclick="goNav('home',this)">
+    <span>⌂</span>
+    الرئيسية
+  </button>
+
+  <button class="nav-item" onclick="showOffers(this)">
+    <span>🔥</span>
+    العروض
+  </button>
+
+  <button class="nav-item" onclick="goNav('productsSection',this)">
+    <span>📦</span>
+    الخدمات
+  </button>
+
+  <button class="nav-item" onclick="openCart(this)">
+    <span>🛒</span>
+    السلة
+  </button>
+
+  <button class="nav-item" onclick="goNav('contact',this)">
+    <span>👤</span>
+    حسابي
+  </button>
+
+</nav>
+
+<!-- PRODUCT DETAILS MODAL -->
+<div class="modal" id="detailsModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h3 id="detailsTitle">تفاصيل المنتج</h3>
+      <button class="close" onclick="closeModal('detailsModal')">✕</button>
+    </div>
+
+    <div id="detailsContent"></div>
+
+  </div>
+
+</div>
+
+<!-- CART MODAL -->
+<div class="modal" id="cartModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
       <h3>🛒 سلة الطلب</h3>
-      <button class="close" onclick="closeCart()">✕</button>
+      <button class="close" onclick="closeModal('cartModal')">✕</button>
     </div>
 
     <div id="cartItems"></div>
 
-    <div class="total">
-      <span>المجموع</span>
-      <span id="cartTotal">0 د.ع</span>
-    </div>
+    <div class="total-box">
 
-    <div class="form">
-
-      <input
-        id="customerName"
-        type="text"
-        placeholder="👤 الاسم">
-
-      <input
-        id="customerPhone"
-        type="tel"
-        placeholder="📱 رقم الهاتف">
-
-      <select id="paymentMethod">
-        <option value="">💳 اختر طريقة الدفع</option>
-        <option value="ماستر الرافدين - 9769867020">
-          ماستر الرافدين
-        </option>
-        <option value="زين كاش - 07711608207">
-          زين كاش
-        </option>
-        <option value="رصيد آسيا - 07711608207">
-          رصيد آسيا
-        </option>
-        <option value="آسيا بي - 07711608207">
-          آسيا بي
-        </option>
-        <option value="فاست بي - 07711608207">
-          فاست بي
-        </option>
-      </select>
-
-      <div class="payments">
-        <div class="payment">💳 ماستر الرافدين: 9769867020</div>
-        <div class="payment">💚 زين كاش: 07711608207</div>
-        <div class="payment">📱 رصيد آسيا: 07711608207</div>
-        <div class="payment">💳 آسيا بي: 07711608207</div>
-        <div class="payment">⚡ فاست بي: 07711608207</div>
+      <div class="total-row">
+        <span>الإجمالي</span>
+        <span id="cartTotal">0 د.ع</span>
       </div>
 
-      <button class="order-btn" onclick="sendOrder()">
-        📲 إرسال الطلب عبر واتساب
+      <div class="form-group">
+        <label>الاسم</label>
+        <input id="customerName" placeholder="اكتب اسمك">
+      </div>
+
+      <div class="form-group">
+        <label>رقم الهاتف</label>
+        <input id="customerPhone" placeholder="07xxxxxxxxx" inputmode="tel">
+      </div>
+
+      <div class="form-group">
+        <label>طريقة الدفع</label>
+
+        <select id="paymentMethod">
+          <option value="">اختر طريقة الدفع</option>
+          <option>ماستر الرافدين - 9769867020</option>
+          <option>زين كاش - 07711608207</option>
+          <option>رصيد آسيا - 07711608207</option>
+          <option>آسيا بي - 07711608207</option>
+          <option>فاست بي - 07711608207</option>
+        </select>
+
+      </div>
+
+      <button
+        class="btn btn-primary"
+        style="width:100%;margin-top:13px"
+        onclick="sendCartOrder()">
+        💬 إرسال الطلب عبر واتساب
       </button>
 
     </div>
+
   </div>
 </div>
 
-<footer>
-  👑 كارة ستور © جميع الحقوق محفوظة
-  <br>
-  خدمة • سرعة • ثقة
-</footer>
+<div class="toast" id="toast"></div>
 
 <script>
 
@@ -960,104 +1244,407 @@ footer{
    DATA
 ========================= */
 
-const WA = "9647711608207";
+const productsData = [
 
-const GROUP_URL =
-  "https://chat.whatsapp.com/E6Os9QbQTrUJR9MGCCsr6K?s=cl&p=a&mlu=4&ilr=4";
+  {
+    id:"kara",
+    name:"كارة ستور TV",
+    icon:"👑",
+    category:"iptv",
+    badge:"🔥 الأكثر طلباً",
+    desc:"خدمة كارة ستور TV للمشاهدة والترفيه.",
+    details:"خدمة IPTV متكاملة للمشاهدة والترفيه، مع إمكانية التفعيل والتجديد عبر واتساب.",
+    devices:"LG • Samsung • Hisense • Android TV • Google TV • Android • iPhone • iPad • Laptop",
+    durations:[
+      ["شهر",10000],
+      ["3 أشهر",15000],
+      ["6 أشهر",20000],
+      ["سنة",25000]
+    ],
+    download:"https://apps.apple.com/eg/app/ora-iptv-player/id6744371383",
+    downloader:"8408809"
+  },
 
-let cart = JSON.parse(
-  localStorage.getItem("kara_cart") || "[]"
-);
+  {
+    id:"moatamad",
+    name:"المعتمد TV",
+    icon:"⭐",
+    category:"iptv",
+    badge:"⭐ مميز",
+    desc:"اشتراك IPTV للمشاهدة والترفيه.",
+    details:"خدمة مشاهدة وترفيه مع مدد متعددة للاشتراك.",
+    devices:"Android TV • Smart TV • Android • iPhone • iPad • Laptop",
+    durations:[
+      ["شهر",5000],
+      ["3 أشهر",10000],
+      ["6 أشهر",15000],
+      ["سنة",25000]
+    ],
+    download:"https://aftv.news/3184973",
+    downloader:"3184973"
+  },
 
-let videoMuted = true;
+  {
+    id:"dream",
+    name:"Dream OTT",
+    icon:"🌙",
+    category:"iptv",
+    badge:"🎬 ترفيه",
+    desc:"خدمة OTT للمشاهدة.",
+    details:"Dream OTT بخيارات اشتراك متعددة وخدمة مخصصة للمشاهدة.",
+    devices:"Android TV • Smart TV • Android • iPhone • iPad • Laptop",
+    durations:[
+      ["شهر",5000],
+      ["3 أشهر",10000],
+      ["6 أشهر",15000],
+      ["سنة",20000]
+    ],
+    download:"https://bit.ly/dreamott38",
+    downloader:"2792643"
+  },
+
+  {
+    id:"max",
+    name:"MAX TV",
+    icon:"🎬",
+    category:"iptv",
+    badge:"🔥 الأكثر طلباً",
+    desc:"أفلام ومسلسلات ورياضة.",
+    details:"خدمة مشاهدة وترفيه تشمل خيارات متعددة من المحتوى.",
+    devices:"Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+    durations:[
+      ["شهر",5000],
+      ["3 أشهر",10000],
+      ["6 أشهر",15000],
+      ["سنة",25000]
+    ],
+    download:"https://aftv.news/9750443",
+    downloader:"9750443"
+  },
+
+  {
+    id:"am",
+    name:"AM TV",
+    icon:"📺",
+    category:"iptv",
+    badge:"✨ جديد",
+    desc:"خدمة IPTV للمشاهدة.",
+    details:"اشتراك AM TV بمدد متعددة.",
+    devices:"Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+    durations:[
+      ["شهر",5000],
+      ["3 أشهر",10000],
+      ["6 أشهر",15000],
+      ["سنة",25000]
+    ]
+  },
+
+  {
+    id:"tiger",
+    name:"TIGER IPTV",
+    icon:"🐯",
+    category:"iptv",
+    badge:"🔥 مطلوب",
+    desc:"خدمة IPTV للمشاهدة والترفيه.",
+    details:"TIGER IPTV مع خيارات اشتراك متعددة.",
+    devices:"Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+    durations:[
+      ["شهر",5000],
+      ["3 أشهر",10000],
+      ["6 أشهر",15000],
+      ["سنة",20000]
+    ],
+    download:"http://bit.ly/tiger4v",
+    downloader:"5182869"
+  },
+
+  {
+    id:"ibo",
+    name:"IBO PLAYER",
+    icon:"▶️",
+    category:"player",
+    badge:"🎯 مشغل",
+    desc:"مشغل IPTV للأجهزة المدعومة.",
+    details:"مشغل IPTV مع خيارات اشتراك متعددة.",
+    devices:"LG • Samsung • Hisense • Smart TV",
+    durations:[
+      ["شهر",5000],
+      ["3 أشهر",10000],
+      ["6 أشهر",15000],
+      ["سنة",20000]
+    ]
+  },
+
+  {
+    id:"bob",
+    name:"BOB PLAYER",
+    icon:"▶️",
+    category:"player",
+    badge:"🎯 مشغل",
+    desc:"مشغل IPTV.",
+    details:"مشغل للمشاهدة على الأجهزة المدعومة.",
+    devices:"Smart TV • Android TV • Android",
+    durations:[
+      ["شهر",5000],
+      ["3 أشهر",10000],
+      ["6 أشهر",15000],
+      ["سنة",20000]
+    ]
+  },
+
+  {
+    id:"xplayer",
+    name:"X PLAYER",
+    icon:"▶️",
+    category:"player",
+    badge:"🎯 مشغل",
+    desc:"مشغل IPTV.",
+    details:"مشغل IPTV بمدد اشتراك مختلفة.",
+    devices:"Smart TV • Android TV • Android",
+    durations:[
+      ["شهر",5000],
+      ["3 أشهر",10000],
+      ["6 أشهر",15000],
+      ["سنة",20000]
+    ]
+  },
+
+  {
+    id:"hotplayer",
+    name:"HOT PLAYER",
+    icon:"🔥",
+    category:"player",
+    badge:"🎯 مشغل",
+    desc:"مشغل IPTV.",
+    details:"مشغل IPTV للأجهزة المدعومة.",
+    devices:"Smart TV • Android TV • Android",
+    durations:[
+      ["شهر",5000],
+      ["3 أشهر",10000],
+      ["6 أشهر",15000],
+      ["سنة",20000]
+    ]
+  }
+
+];
 
 
 /* =========================
-   VIDEO SOUND
+   STORAGE
 ========================= */
 
-function toggleVideoSound(){
+let cart = JSON.parse(localStorage.getItem("kara_cart") || "[]");
 
-  const video = document.getElementById("heroVideo");
-  const btn = document.getElementById("soundBtn");
+let customer = JSON.parse(
+  localStorage.getItem("kara_customer") || "{}"
+);
 
-  if(!video) return;
 
-  /*
-    YouTube API command:
-    يحاول تشغيل/إيقاف الصوت بدون تغيير رابط الفيديو.
-  */
+/* =========================
+   HELPERS
+========================= */
 
-  if(videoMuted){
+function formatPrice(num){
+  return Number(num).toLocaleString("en-US") + " د.ع";
+}
 
-    video.contentWindow.postMessage(
-      JSON.stringify({
-        event:"command",
-        func:"unMute",
-        args:[]
-      }),
-      "*"
-    );
+function saveCart(){
+  localStorage.setItem("kara_cart",JSON.stringify(cart));
+  updateCartCount();
+}
 
-    video.contentWindow.postMessage(
-      JSON.stringify({
-        event:"command",
-        func:"setVolume",
-        args:[100]
-      }),
-      "*"
-    );
+function showToast(message){
 
-    videoMuted = false;
+  const toast = document.getElementById("toast");
 
-    btn.textContent = "🔊 إيقاف الصوت";
+  toast.textContent = message;
+  toast.classList.add("show");
 
-  }else{
+  clearTimeout(window.toastTimer);
 
-    video.contentWindow.postMessage(
-      JSON.stringify({
-        event:"command",
-        func:"mute",
-        args:[]
-      }),
-      "*"
-    );
-
-    videoMuted = true;
-
-    btn.textContent = "🔇 تشغيل الصوت";
-  }
+  window.toastTimer = setTimeout(()=>{
+    toast.classList.remove("show");
+  },2200);
 }
 
 
 /* =========================
-   CATEGORY
+   RENDER PRODUCTS
 ========================= */
 
-function showCategory(category){
+function renderProducts(){
 
-  const iptv = document.getElementById("iptvSection");
-  const players = document.getElementById("playersSection");
+  const container = document.getElementById("products");
 
-  const iptvTab = document.getElementById("iptvTab");
-  const playersTab = document.getElementById("playersTab");
+  container.innerHTML = "";
 
-  if(category === "iptv"){
+  productsData.forEach(product=>{
 
-    iptv.style.display = "block";
-    players.style.display = "none";
+    const options = product.durations
+      .map((d,i)=>
+        `<option value="${i}">
+          ${d[0]} — ${formatPrice(d[1])}
+        </option>`
+      )
+      .join("");
 
-    iptvTab.classList.add("active");
-    playersTab.classList.remove("active");
+    const firstPrice = product.durations[0][1];
 
-  }else{
+    const downloadHTML = product.download
+      ? `
+        <a
+          class="download-btn"
+          href="${product.download}"
+          target="_blank">
+          ⬇️ تحميل
+        </a>
+      `
+      : "";
 
-    iptv.style.display = "none";
-    players.style.display = "block";
+    const downloaderHTML = product.downloader
+      ? `
+        <div class="downloader">
+          🔢 Downloader:
+          <strong>${product.downloader}</strong>
+        </div>
+      `
+      : "";
 
-    iptvTab.classList.remove("active");
-    playersTab.classList.add("active");
-  }
+    const html = `
+      <article
+        class="product"
+        id="product-${product.id}"
+        data-id="${product.id}"
+        data-category="${product.category}"
+        data-name="${product.name.toLowerCase()}">
+
+        <div class="product-top">
+
+          <div class="product-icon">
+            ${product.icon}
+          </div>
+
+          <div class="product-info">
+
+            <div class="product-name">
+              ${product.name}
+            </div>
+
+            <div class="product-desc">
+              ${product.desc}
+            </div>
+
+            <span class="badge">
+              ${product.badge}
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="product-controls">
+
+          <select
+            class="duration-select"
+            onchange="updateProductPrice('${product.id}',this)">
+
+            ${options}
+
+          </select>
+
+          <div
+            class="price"
+            id="price-${product.id}">
+            ${formatPrice(firstPrice)}
+          </div>
+
+        </div>
+
+        <div class="product-buttons">
+
+          <button
+            class="order-btn"
+            onclick="directOrder('${product.id}')">
+            💬 طلب
+          </button>
+
+          <button
+            class="cart-btn"
+            onclick="addToCart('${product.id}')">
+            🛒 أضف للسلة
+          </button>
+
+          <button
+            class="details-btn"
+            onclick="openDetails('${product.id}')">
+            ℹ️ التفاصيل
+          </button>
+
+          ${downloadHTML}
+
+        </div>
+
+        ${downloaderHTML}
+
+      </article>
+    `;
+
+    container.insertAdjacentHTML("beforeend",html);
+
+  });
+
+  updateResultCount();
+}
+
+
+/* =========================
+   PRICE
+========================= */
+
+function updateProductPrice(id,select){
+
+  const product = productsData.find(p=>p.id===id);
+
+  if(!product) return;
+
+  const duration = product.durations[select.value];
+
+  document.getElementById("price-"+id).innerHTML =
+    formatPrice(duration[1]);
+}
+
+
+/* =========================
+   ADD CART
+========================= */
+
+function addToCart(id){
+
+  const product = productsData.find(p=>p.id===id);
+
+  if(!product) return;
+
+  const select =
+    document.querySelector(
+      `#product-${id} .duration-select`
+    );
+
+  const duration =
+    product.durations[select.value];
+
+  const item = {
+    id:id,
+    name:product.name,
+    duration:duration[0],
+    price:duration[1]
+  };
+
+  cart.push(item);
+
+  saveCart();
+
+  showToast("🛒 تمت إضافة الخدمة إلى السلة");
+
 }
 
 
@@ -1065,89 +1652,60 @@ function showCategory(category){
    CART
 ========================= */
 
-function saveCart(){
+function updateCartCount(){
 
-  localStorage.setItem(
-    "kara_cart",
-    JSON.stringify(cart)
-  );
-
-  renderCart();
-}
-
-
-function addProduct(name,price){
-
-  cart.push({
-    id:Date.now() + Math.random(),
-    name:name,
-    price:Number(price)
-  });
-
-  saveCart();
-
-  alert("✅ تمت إضافة المنتج إلى السلة");
-}
-
-
-function removeProduct(id){
-
-  cart = cart.filter(
-    item => item.id !== id
-  );
-
-  saveCart();
+  document.getElementById("cartCount").textContent =
+    cart.length;
 }
 
 
 function renderCart(){
 
-  const itemsBox =
-    document.getElementById("cartItems");
+  const box = document.getElementById("cartItems");
 
-  const totalBox =
-    document.getElementById("cartTotal");
+  if(!cart.length){
 
-  const countBox =
-    document.getElementById("cartCount");
+    box.innerHTML = `
+      <div class="empty">
+        🛒 السلة فارغة حالياً
+        <br>
+        اختر خدمة وأضفها إلى السلة.
+      </div>
+    `;
 
-  if(!itemsBox) return;
-
-  countBox.textContent = cart.length;
-
-  if(cart.length === 0){
-
-    itemsBox.innerHTML =
-      '<div style="text-align:center;color:#9da8bd;padding:25px">السلة فارغة 🛒</div>';
-
-    totalBox.textContent = "0 د.ع";
+    document.getElementById("cartTotal").textContent =
+      "0 د.ع";
 
     return;
   }
 
   let total = 0;
 
-  itemsBox.innerHTML = cart.map(item => {
+  box.innerHTML = cart.map((item,index)=>{
 
     total += Number(item.price);
 
     return `
       <div class="cart-item">
 
-        <div>
-          <div class="cart-item-name">
-            ${escapeHtml(item.name)}
-          </div>
+        <div class="cart-item-info">
 
-          <div class="cart-item-price">
-            ${Number(item.price).toLocaleString()} د.ع
-          </div>
+          <strong>${item.name}</strong>
+
+          <small>
+            ${item.duration}
+          </small>
+
+        </div>
+
+        <div class="cart-price">
+          ${formatPrice(item.price)}
         </div>
 
         <button
-          class="remove"
-          onclick="removeProduct(${item.id})">
-          حذف
+          class="delete"
+          onclick="removeCartItem(${index})">
+          🗑️
         </button>
 
       </div>
@@ -1155,74 +1713,177 @@ function renderCart(){
 
   }).join("");
 
-  totalBox.textContent =
-    total.toLocaleString() + " د.ع";
+  document.getElementById("cartTotal").textContent =
+    formatPrice(total);
+
+  document.getElementById("customerName").value =
+    customer.name || "";
+
+  document.getElementById("customerPhone").value =
+    customer.phone || "";
+
+  document.getElementById("paymentMethod").value =
+    customer.payment || "";
+}
+
+
+function removeCartItem(index){
+
+  cart.splice(index,1);
+
+  saveCart();
+  renderCart();
+
+  showToast("تم حذف الخدمة من السلة");
 }
 
 
 function openCart(){
 
+  renderCart();
+
   document
-    .getElementById("cartPanel")
+    .getElementById("cartModal")
     .classList.add("show");
 
-  renderCart();
 }
 
 
-function closeCart(){
+function clearCart(){
+
+  cart = [];
+
+  saveCart();
+  renderCart();
+
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+function openDetails(id){
+
+  const product =
+    productsData.find(p=>p.id===id);
+
+  if(!product) return;
+
+  document.getElementById("detailsTitle").textContent =
+    product.name;
+
+  const durations = product.durations
+    .map(d=>`
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:9px 0;
+        border-bottom:1px solid var(--line)">
+        <span>${d[0]}</span>
+        <strong>${formatPrice(d[1])}</strong>
+      </div>
+    `)
+    .join("");
+
+  document.getElementById("detailsContent").innerHTML = `
+
+    <div style="
+      text-align:center;
+      font-size:45px;
+      margin-bottom:10px">
+      ${product.icon}
+    </div>
+
+    <div class="detail-box">
+
+      <strong style="font-size:16px">
+        ${product.name}
+      </strong>
+
+      <p>${product.details}</p>
+
+      <p>
+        📱 <strong>الأجهزة:</strong><br>
+        ${product.devices}
+      </p>
+
+      <hr style="border-color:var(--line)">
+
+      <strong>💰 الأسعار</strong>
+
+      ${durations}
+
+      ${
+        product.downloader
+        ?
+        `<p style="color:#ffd36b">
+          🔢 Downloader:
+          <strong>${product.downloader}</strong>
+        </p>`
+        :""
+      }
+
+    </div>
+
+    <button
+      class="btn btn-primary"
+      style="width:100%;margin-top:12px"
+      onclick="addToCart('${product.id}');closeModal('detailsModal')">
+      🛒 أضف للسلة
+    </button>
+
+  `;
 
   document
-    .getElementById("cartPanel")
-    .classList.remove("show");
-}
+    .getElementById("detailsModal")
+    .classList.add("show");
 
-
-function closeCartOutside(event){
-
-  if(event.target.id === "cartPanel"){
-    closeCart();
-  }
 }
 
 
 /* =========================
-   QUICK ORDER
+   DIRECT ORDER
 ========================= */
 
-function quickOrder(product){
+function directOrder(id){
+
+  const product =
+    productsData.find(p=>p.id===id);
+
+  if(!product) return;
+
+  const select =
+    document.querySelector(
+      `#product-${id} .duration-select`
+    );
+
+  const duration =
+    product.durations[select.value];
 
   const message =
-`👑 كارة ستور
+`👑 طلب جديد من كارة ستور
 
-السلام عليكم
-أرغب بطلب:
-📺 ${product}
+📦 الخدمة: ${product.name}
+⏱️ المدة: ${duration[0]}
+💰 السعر: ${formatPrice(duration[1])}
 
-📲 رقم التواصل:
-07711608207
+📲 أرجو متابعة الطلب والتفعيل.`;
 
-يرجى تزويدي بتفاصيل الاشتراك والتفعيل.`;
-
-  window.open(
-    "https://wa.me/" +
-    WA +
-    "?text=" +
-    encodeURIComponent(message),
-    "_blank"
-  );
+  openWhatsApp(message);
 }
 
 
 /* =========================
-   SEND ORDER
+   CART ORDER
 ========================= */
 
-function sendOrder(){
+function sendCartOrder(){
 
-  if(cart.length === 0){
+  if(!cart.length){
 
-    alert("🛒 السلة فارغة");
+    showToast("السلة فارغة");
+
     return;
   }
 
@@ -1237,90 +1898,330 @@ function sendOrder(){
 
   if(!name){
 
-    alert("⚠️ اكتب الاسم");
+    showToast("اكتب اسمك أولاً");
     return;
   }
 
   if(!phone){
 
-    alert("⚠️ اكتب رقم الهاتف");
+    showToast("اكتب رقم الهاتف");
     return;
   }
 
   if(!payment){
 
-    alert("⚠️ اختر طريقة الدفع");
+    showToast("اختر طريقة الدفع");
     return;
   }
 
+  customer = {
+    name:name,
+    phone:phone,
+    payment:payment
+  };
+
+  localStorage.setItem(
+    "kara_customer",
+    JSON.stringify(customer)
+  );
+
   let total = 0;
 
-  const products = cart.map((item,index)=>{
+  let productsText = "";
+
+  cart.forEach((item,index)=>{
 
     total += Number(item.price);
 
-    return `${index + 1}- ${item.name} — ${Number(item.price).toLocaleString()} د.ع`;
+    productsText +=
+`${index+1}. ${item.name}
+المدة: ${item.duration}
+السعر: ${formatPrice(item.price)}
 
-  }).join("\n");
+`;
+  });
 
   const message =
 `👑 طلب جديد من كارة ستور
 
-👤 الاسم:
-${name}
+👤 الاسم: ${name}
+📱 الهاتف: ${phone}
 
-📱 رقم الهاتف:
-${phone}
-
-📦 المنتجات:
-${products}
-
-💰 المجموع:
-${total.toLocaleString()} د.ع
+📦 الخدمات:
+${productsText}
+💰 الإجمالي: ${formatPrice(total)}
 
 💳 طريقة الدفع:
 ${payment}
 
-📲 رقم واتساب المتجر:
-07711608207
+📲 يرجى متابعة الطلب والتفعيل.`;
 
-شكراً لاختياركم كارة ستور ❤️`;
-
-  localStorage.setItem(
-    "kara_customer",
-    JSON.stringify({
-      name:name,
-      phone:phone
-    })
-  );
-
-  localStorage.setItem(
-    "kara_payment",
-    payment
-  );
-
-  window.open(
-    "https://wa.me/" +
-    WA +
-    "?text=" +
-    encodeURIComponent(message),
-    "_blank"
-  );
+  openWhatsApp(message);
 }
 
 
 /* =========================
-   SECURITY
+   WHATSAPP
 ========================= */
 
-function escapeHtml(text){
+function openWhatsApp(message){
 
-  return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  const url =
+    "https://wa.me/9647711608207?text=" +
+    encodeURIComponent(message);
+
+  window.open(url,"_blank");
+
+}
+
+
+/* =========================
+   SEARCH / FILTER
+========================= */
+
+let activeCategory = "all";
+
+
+function filterProducts(){
+
+  const query =
+    document
+      .getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const products =
+    document.querySelectorAll(".product");
+
+  let count = 0;
+
+  products.forEach(product=>{
+
+    const name =
+      product.dataset.name;
+
+    const category =
+      product.dataset.category;
+
+    const matchSearch =
+      !query || name.includes(query);
+
+    const matchCategory =
+      activeCategory==="all" ||
+      category===activeCategory ||
+      (activeCategory==="offers" &&
+       product.querySelector(".badge"));
+
+    const visible =
+      matchSearch && matchCategory;
+
+    product.style.display =
+      visible ? "block" : "none";
+
+    if(visible) count++;
+
+  });
+
+  document.getElementById("resultCount").textContent =
+    count + " خدمة";
+}
+
+
+function updateResultCount(){
+
+  const visible =
+    [...document.querySelectorAll(".product")]
+      .filter(p=>p.style.display!=="none")
+      .length;
+
+  document.getElementById("resultCount").textContent =
+    visible + " خدمة";
+}
+
+
+document.querySelectorAll(".cat")
+.forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    document.querySelectorAll(".cat")
+      .forEach(b=>b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    activeCategory =
+      button.dataset.category;
+
+    filterProducts();
+
+  });
+
+});
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function goNav(id,button){
+
+  document
+    .getElementById(id)
+    ?.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(n=>n.classList.remove("active"));
+
+  if(button)
+    button.classList.add("active");
+}
+
+
+function scrollToProducts(){
+
+  document
+    .getElementById("productsSection")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+function focusProduct(id){
+
+  const element =
+    document.getElementById("product-"+id);
+
+  if(!element) return;
+
+  element.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+
+  element.style.boxShadow =
+    "0 0 0 2px rgba(145,71,255,.7),0 15px 50px rgba(145,71,255,.15)";
+
+  setTimeout(()=>{
+    element.style.boxShadow = "";
+  },1800);
+
+}
+
+
+function showOffers(button){
+
+  document
+    .querySelectorAll(".cat")
+    .forEach(b=>b.classList.remove("active"));
+
+  const offerButton =
+    document.querySelector('[data-category="offers"]');
+
+  if(offerButton)
+    offerButton.classList.add("active");
+
+  activeCategory = "offers";
+
+  filterProducts();
+
+  document
+    .getElementById("productsSection")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(n=>n.classList.remove("active"));
+
+  button.classList.add("active");
+
+}
+
+
+/* =========================
+   MODALS
+========================= */
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+document.querySelectorAll(".modal")
+.forEach(modal=>{
+
+  modal.addEventListener("click",(e)=>{
+
+    if(e.target===modal)
+      modal.classList.remove("show");
+
+  });
+
+});
+
+
+/* =========================
+   YOUTUBE SOUND
+========================= */
+
+let videoMuted = true;
+
+
+function sendYTCommand(command,args=[]){
+
+  const iframe =
+    document.getElementById("heroVideo");
+
+  iframe.contentWindow.postMessage(
+    JSON.stringify({
+      event:"command",
+      func:command,
+      args:args
+    }),
+    "*"
+  );
+
+}
+
+
+function toggleVideoSound(){
+
+  const btn =
+    document.getElementById("soundBtn");
+
+  if(videoMuted){
+
+    sendYTCommand("unMute");
+    sendYTCommand("setVolume",[100]);
+
+    btn.textContent =
+      "🔊 إيقاف الصوت";
+
+    videoMuted = false;
+
+  }else{
+
+    sendYTCommand("mute");
+
+    btn.textContent =
+      "🔇 تشغيل الصوت";
+
+    videoMuted = true;
+
+  }
+
 }
 
 
@@ -1328,14 +2229,8 @@ function escapeHtml(text){
    INIT
 ========================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
-
-    renderCart();
-
-  }
-);
+renderProducts();
+updateCartCount();
 
 </script>
 
