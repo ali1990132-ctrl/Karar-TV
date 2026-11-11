@@ -1,0 +1,481 @@
+[
+ {
+  "id": "kara",
+  "name": "كارة ستور TV",
+  "icon": "👑",
+  "cat": "iptv",
+  "badge": "🔥 الأكثر طلباً",
+  "desc": "خدمة IPTV متكاملة للمشاهدة والترفيه.",
+  "details": "خدمة كارة ستور TV للمشاهدة والترفيه مع مدد متعددة.",
+  "devices": "LG • Samsung • Hisense • Android TV • Google TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    25000
+   ]
+  ],
+  "download": "https://aftv.news/2437775",
+  "downloader": "2437775",
+  "color": "234,179,8"
+ },
+ {
+  "id": "moatamad",
+  "name": "المعتمد TV",
+  "icon": "⭐",
+  "cat": "iptv",
+  "badge": "⭐ مميز",
+  "desc": "اشتراك IPTV للمشاهدة والترفيه.",
+  "details": "خدمة مشاهدة وترفيه بمدد اشتراك متعددة.",
+  "devices": "Android TV • Smart TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    25000
+   ]
+  ],
+  "download": "https://aftv.news/3184973",
+  "downloader": "3184973",
+  "color": "249,115,22"
+ },
+ {
+  "id": "dream",
+  "name": "Dream OTT",
+  "icon": "🌙",
+  "cat": "iptv",
+  "badge": "🎬 ترفيه",
+  "desc": "خدمة OTT للمشاهدة.",
+  "details": "Dream OTT بخيارات اشتراك متعددة.",
+  "devices": "Android TV • Smart TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    20000
+   ]
+  ],
+  "download": "https://bit.ly/dreamott38",
+  "downloader": "2792643",
+  "color": "168,85,247"
+ },
+ {
+  "id": "max",
+  "name": "MAX TV",
+  "icon": "🎬",
+  "cat": "iptv",
+  "badge": "🔥 الأكثر طلباً",
+  "desc": "أفلام ومسلسلات ورياضة.",
+  "details": "خدمة مشاهدة وترفيه بمدد متعددة.",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    25000
+   ]
+  ],
+  "download": "https://aftv.news/9750443",
+  "downloader": "9750443",
+  "color": "239,68,68"
+ },
+ {
+  "id": "shamel",
+  "name": "شامل TV",
+  "icon": "📡",
+  "cat": "iptv",
+  "badge": "📡 خدمة IPTV",
+  "newUntil": "2026-11-07",
+  "desc": "عالم الترفيه بين يديك.",
+  "details": "خدمة شامل TV للمشاهدة والترفيه مع مدد متعددة.",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    25000
+   ]
+  ],
+  "download": "https://aftv.news/2341191",
+  "downloader": "2341191",
+  "color": "6,182,212"
+ },
+ {
+  "id": "apex",
+  "name": "Apex+",
+  "icon": "📺",
+  "cat": "iptv",
+  "badge": "📺 خدمة IPTV",
+  "newUntil": "2026-11-07",
+  "desc": "خدمة IPTV للمشاهدة والترفيه.",
+  "details": "خدمة Apex+ للمشاهدة والترفيه مع مدد متعددة.",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    10000
+   ],
+   [
+    "3 أشهر",
+    20000
+   ],
+   [
+    "6 أشهر",
+    30000
+   ],
+   [
+    "سنة",
+    40000
+   ]
+  ],
+  "download": "https://play.google.com/store/apps/details?id=com.apexcloud.app",
+  "downloader": "5890868",
+  "color": "16,185,129"
+ },
+ {
+  "id": "castora",
+  "name": "Castora",
+  "icon": "🎬",
+  "cat": "iptv",
+  "badge": "🎬 ترفيه",
+  "newUntil": "2026-11-07",
+  "desc": "خدمة IPTV للمشاهدة والترفيه.",
+  "details": "خدمة Castora للمشاهدة والترفيه مع مدد متعددة.",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    10000
+   ],
+   [
+    "3 أشهر",
+    15000
+   ],
+   [
+    "6 أشهر",
+    25000
+   ],
+   [
+    "سنة",
+    35000
+   ]
+  ],
+  "download": "https://android.splayer.in/castora.apk",
+  "downloader": "3325644",
+  "color": "59,130,246"
+ },
+ {
+  "id": "am",
+  "name": "AM TV",
+  "icon": "📺",
+  "cat": "iptv",
+  "badge": "📺 قنوات مباشرة",
+  "newUntil": "2026-11-07",
+  "desc": "خدمة IPTV للمشاهدة.",
+  "details": "اشتراك AM TV بمدد متعددة.",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    25000
+   ]
+  ],
+  "download": "https://shtv.me/amt",
+  "downloader": "5078545",
+  "color": "236,72,153"
+ },
+ {
+  "id": "tiger",
+  "name": "TIGER IPTV",
+  "icon": "🐯",
+  "cat": "iptv",
+  "badge": "🔥 مطلوب",
+  "desc": "خدمة IPTV للمشاهدة والترفيه.",
+  "details": "TIGER IPTV بمدد متعددة.",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    20000
+   ]
+  ],
+  "download": "http://bit.ly/tiger4v",
+  "downloader": "5182869",
+  "color": "217,119,6"
+ },
+ {
+  "id": "sh7na",
+  "name": "شحنة ستور",
+  "icon": "📺",
+  "cat": "iptv",
+  "badge": "📺 خدمة IPTV",
+  "newUntil": "2026-11-07",
+  "desc": "خدمة IPTV للمشاهدة والترفيه.",
+  "details": "خدمة شحنة ستور للمشاهدة والترفيه مع مدد متعددة.",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    25000
+   ]
+  ],
+  "download": "http://aftv.news/7934898",
+  "downloader": "7934898",
+  "color": "220,38,38"
+ },
+ {
+  "id": "vexa",
+  "name": "Vexa TV",
+  "icon": "📺",
+  "cat": "iptv",
+  "badge": "📺 خدمة IPTV",
+  "newUntil": "2026-11-28",
+  "desc": "خدمة IPTV للمشاهدة والترفيه.",
+  "details": "خدمة Vexa TV للمشاهدة والترفيه مع مدد متعددة.",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    25000
+   ]
+  ],
+  "download": "https://play.google.com/store/apps/details?id=com.vexa.tv",
+  "downloader": "4582579",
+  "color": "124,58,237"
+ },
+ {
+  "id": "ibo",
+  "name": "IBO PLAYER",
+  "icon": "▶️",
+  "cat": "player",
+  "badge": "🎯 مشغل",
+  "desc": "مشغل IPTV للأجهزة المدعومة.",
+  "details": "مشغل IPTV.",
+  "devices": "LG • Samsung • Hisense • Smart TV",
+  "types": [
+   "live"
+  ],
+  "durations": [
+   [
+    "سنة",
+    15000
+   ]
+  ],
+  "color": "20,184,166"
+ },
+ {
+  "id": "bob",
+  "name": "BOB PLAYER",
+  "icon": "▶️",
+  "cat": "player",
+  "badge": "🎯 مشغل",
+  "desc": "مشغل IPTV.",
+  "details": "مشغل للمشاهدة.",
+  "devices": "Smart TV • Android TV • Android",
+  "types": [
+   "live"
+  ],
+  "durations": [
+   [
+    "سنة",
+    15000
+   ]
+  ],
+  "color": "192,38,211"
+ },
+ {
+  "id": "xplayer",
+  "name": "X PLAYER",
+  "icon": "▶️",
+  "cat": "player",
+  "badge": "🎯 مشغل",
+  "desc": "مشغل IPTV.",
+  "details": "مشغل IPTV بمدد متعددة.",
+  "devices": "Smart TV • Android TV • Android",
+  "types": [
+   "live"
+  ],
+  "durations": [
+   [
+    "سنة",
+    15000
+   ]
+  ],
+  "color": "244,63,94"
+ },
+ {
+  "id": "hotplayer",
+  "name": "HOT PLAYER",
+  "icon": "🔥",
+  "cat": "player",
+  "badge": "🎯 مشغل",
+  "desc": "مشغل IPTV للأجهزة المدعومة.",
+  "details": "مشغل IPTV للأجهزة المدعومة.",
+  "devices": "Smart TV • Android TV • Android",
+  "types": [
+   "live"
+  ],
+  "durations": [
+   [
+    "سنة",
+    15000
+   ]
+  ],
+  "color": "234,88,12"
+ }
+]

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>لوحة تحكم متجر كارة</title>
+<style>
+:root{--bg:#07090f;--card:#111624;--line:#232a3d;--muted:#8b93a7;--accent:#7b2ff7;--gold:#ffc93c;--ok:#22c55e;--bad:#ef4444}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:#fff;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;font-size:14px;padding-bottom:90px}
+header{position:sticky;top:0;z-index:5;background:rgba(7,9,15,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 14px;display:flex;align-items:center;gap:10px}
+header h1{font-size:16px;margin:0;flex:1}
+header a{color:var(--muted);text-decoration:none;font-size:12px}
+main{max-width:640px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+h2{font-size:15px;margin:0 0 10px}
+p.help{color:var(--muted);font-size:12px;line-height:1.9;margin:6px 0}
+p.help a{color:var(--gold)}
+label{display:block;font-size:12px;color:var(--muted);margin:10px 0 5px}
+input,select,textarea{width:100%;background:#0b0f1a;border:1px solid var(--line);border-radius:11px;color:#fff;padding:11px;font:inherit;font-size:14px}
+textarea{min-height:64px;resize:vertical}
+input[type=color]{padding:3px;height:44px}
+input[type=checkbox]{width:auto;transform:scale(1.3);margin-left:8px}
+.btn{border:0;border-radius:12px;padding:12px 14px;font:inherit;font-weight:800;font-size:13px;color:#fff;background:#252d42;cursor:pointer}
+.btn.primary{background:var(--accent)}
+.btn.gold{background:var(--gold);color:#1a1200}
+.btn.bad{background:#3a1520;color:#ff8a8a}
+.btn.small{padding:8px 10px;font-size:12px;border-radius:10px}
+.btn:disabled{opacity:.5}
+.row{display:flex;gap:8px;align-items:center}
+.row>*{flex:1}
+.toolbar{display:flex;gap:8px;margin-bottom:12px}
+.toolbar .btn{flex:1}
+.item{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-right:4px solid rgb(var(--c,123,47,247));border-radius:14px;padding:10px;margin-bottom:8px}
+.item.hidden{opacity:.45}
+.thumb{width:48px;height:48px;flex:0 0 48px;border-radius:12px;background:#0b0f1a;display:grid;place-items:center;font-size:24px;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.info{flex:1;min-width:0}
+.info b{display:block;font-size:14px}
+.info small{color:var(--muted);font-size:11px}
+.acts{display:flex;flex-direction:column;gap:4px}
+.acts .btn{padding:6px 9px;font-size:12px}
+.catTitle{color:var(--gold);font-size:12px;font-weight:800;margin:14px 2px 8px}
+.dur{display:grid;grid-template-columns:1fr 1fr 40px;gap:6px;margin-bottom:6px}
+.chips{display:flex;gap:14px;flex-wrap:wrap;font-size:13px}
+.chips label{display:flex;align-items:center;color:#fff;margin:4px 0;font-size:13px}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:20;display:none;overflow:auto;padding:14px}
+#modal .card{max-width:600px;margin:0 auto 40px}
+.preview{width:96px;height:72px;border-radius:12px;object-fit:cover;border:1px solid var(--line);display:none;margin-top:8px}
+#toast{position:fixed;bottom:20px;right:14px;left:14px;max-width:520px;margin:0 auto;background:#1b2236;border:1px solid var(--line);border-radius:14px;padding:13px;text-align:center;font-size:13px;z-index:30;display:none;line-height:1.7}
+#toast.ok{border-color:var(--ok)}#toast.bad{border-color:var(--bad)}
+#status{color:var(--muted);font-size:12px;text-align:center;margin:8px 0}
+.hint{color:var(--muted);font-size:11px;margin-top:4px}
+</style>
+</head>
+<body>
+<header>
+ <h1>⚙️ لوحة تحكم متجر كارة</h1>
+ <a href="./">رجوع للمتجر ←</a>
+</header>
+<main>
+
+<section id="login" class="card" style="display:none">
+ <h2>🔐 تسجيل الدخول</h2>
+ <p class="help">اللوحة تحفظ التعديلات مباشرة بمستودع الموقع على GitHub، فتحتاج <b>مفتاح دخول (Token)</b> مرة وحدة بس على هذا الجهاز.</p>
+ <p class="help">
+  شلون تجيب المفتاح:<br>
+  1. افتح <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">صفحة إنشاء مفتاح بـ GitHub</a><br>
+  2. Token name: اكتب <b>kara-admin</b>، وExpiration: اختار <b>No expiration</b> أو مدة طويلة<br>
+  3. Repository access: اختار <b>Only select repositories</b> وبعدها <b>Karar-TV</b><br>
+  4. Permissions ← Repository permissions ← <b>Contents</b>: اختار <b>Read and write</b><br>
+  5. اضغط <b>Generate token</b>، انسخ المفتاح والصقه هنا
+ </p>
+ <label>مفتاح الدخول</label>
+ <input id="tokenInput" type="password" placeholder="github_pat_..." autocomplete="off">
+ <button class="btn primary" style="width:100%;margin-top:12px" onclick="login()">دخول</button>
+</section>
+
+<section id="app" style="display:none">
+ <div class="toolbar">
+  <button class="btn gold" onclick="openForm()">➕ منتج جديد</button>
+  <button class="btn" onclick="load()">🔄 تحديث</button>
+ </div>
+ <div id="status"></div>
+ <div id="list"></div>
+ <button class="btn bad small" style="margin-top:20px" onclick="logout()">تسجيل خروج من هذا الجهاز</button>
+</section>
+
+</main>
+
+<div id="modal">
+ <div class="card">
+  <h2 id="formTitle">منتج جديد</h2>
+
+  <label>اسم المنتج *</label>
+  <input id="f_name" placeholder="مثلاً: كارة ستور TV">
+
+  <div class="row">
+   <div><label>القسم</label>
+    <select id="f_cat"><option value="iptv">📺 خدمات IPTV</option><option value="player">▶️ مشغلات</option></select></div>
+   <div><label>أيقونة (إيموجي)</label><input id="f_icon" placeholder="📺" maxlength="4"></div>
+  </div>
+
+  <label>صورة المنتج (اختياري)</label>
+  <input id="f_image" type="file" accept="image/*" onchange="pickImage(this)">
+  <img id="imgPreview" class="preview" alt="">
+  <div class="hint" id="imgHint"></div>
+
+  <label>الشارة (مثل: 🔥 الأكثر طلباً)</label>
+  <input id="f_badge">
+
+  <label>وصف قصير</label>
+  <input id="f_desc">
+
+  <label>التفاصيل</label>
+  <textarea id="f_details"></textarea>
+
+  <label>الأجهزة المدعومة</label>
+  <input id="f_devices" placeholder="Smart TV • Android TV • Android • iPhone">
+
+  <label>نوع المحتوى</label>
+  <div class="chips">
+   <label><input type="checkbox" id="t_movie">أفلام ومسلسلات</label>
+   <label><input type="checkbox" id="t_sport">رياضة</label>
+   <label><input type="checkbox" id="t_live">قنوات مباشرة</label>
+  </div>
+
+  <label>المدد والأسعار (د.ع) *</label>
+  <div id="durs"></div>
+  <button class="btn small" onclick="addDur()">➕ إضافة مدة</button>
+  <div class="hint">تكدر تكتب السعر بالآلاف: 10 تصير 10,000 د.ع</div>
+  <datalist id="durNames"><option value="شهر"><option value="3 أشهر"><option value="6 أشهر"><option value="سنة"></datalist>
+
+  <label>رابط تحميل التطبيق</label>
+  <input id="f_download" type="url" dir="ltr" placeholder="https://...">
+
+  <label>كود Downloader</label>
+  <input id="f_downloader" dir="ltr" inputmode="numeric">
+
+  <div class="row">
+   <div><label>لون المنتج</label><input id="f_color" type="color" value="#7b2ff7"></div>
+   <div><label>يظهر "جديد" لحد تاريخ</label><input id="f_newUntil" type="date"></div>
+  </div>
+
+  <label><input type="checkbox" id="f_hidden">إخفاء المنتج من المتجر (بدون حذف)</label>
+
+  <div class="row" style="margin-top:16px">
+   <button class="btn primary" id="saveBtn" onclick="saveForm()">💾 حفظ ونشر</button>
+   <button class="btn" onclick="closeForm()">إلغاء</button>
+  </div>
+ </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const REPO="ali1990132-ctrl/Karar-TV";
+const API="https://api.github.com/repos/"+REPO+"/contents/";
+const FILE="products.json";
+let token=localStorage.getItem("kara_admin_token")||"";
+let products=[],sha=null,editIndex=-1,pendingImage=null,busy=false;
+
+function $(id){return document.getElementById(id)}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function money(n){return Number(n).toLocaleString("en-US")+" د.ع"}
+function toast(msg,type){const t=$("toast");t.textContent=msg;t.className=type||"";t.style.display="block";clearTimeout(t._h);t._h=setTimeout(()=>t.style.display="none",type==="bad"?6000:3500)}
+function setStatus(s){$("status").textContent=s}
+
+function b64decode(c){const bin=atob(c.replace(/\n/g,""));const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}
+function b64encode(str){const bytes=new TextEncoder().encode(str);let bin="";for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+8192));return btoa(bin)}
+
+async function gh(path,opts){
+ const r=await fetch(API+path,Object.assign({},opts,{headers:{"Authorization":"Bearer "+token,"Accept":"application/vnd.github+json","Content-Type":"application/json"}}));
+ if(r.status===401||r.status===403){
+  const body=await r.text();
+  if(r.status===401||/permission|Resource not accessible/i.test(body)){logout();throw new Error("المفتاح غلط أو ما عنده صلاحية Contents: Read and write على Karar-TV");}
+  throw new Error("GitHub رفض الطلب ("+r.status+")");
+ }
+ if(r.status===409||r.status===422&&opts&&opts.method==="PUT")throw new Error("CONFLICT");
+ if(!r.ok)throw new Error("خطأ من GitHub ("+r.status+")");
+ return r.json();
+}
+
+function login(){
+ const v=$("tokenInput").value.trim();
+ if(!v){toast("الصق المفتاح أولاً","bad");return}
+ token=v;localStorage.setItem("kara_admin_token",v);
+ load();
+}
+function logout(){token="";localStorage.removeItem("kara_admin_token");$("app").style.display="none";$("login").style.display="block"}
+
+async function load(){
+ $("login").style.display="none";$("app").style.display="block";
+ setStatus("⏳ جاري التحميل...");
+ try{
+  const d=await gh(FILE+"?ref=main&t="+Date.now());
+  sha=d.sha;products=JSON.parse(b64decode(d.content));
+  render();
+  setStatus("عدد المنتجات: "+products.length);
+ }catch(e){
+  setStatus("");toast(e.message,"bad");
+ }
+}
+
+async function publish(msg){
+ if(busy)return false;busy=true;
+ setStatus("⏳ جاري الحفظ والنشر...");
+ try{
+  const body={message:msg,content:b64encode(JSON.stringify(products,null,1)),sha:sha,branch:"main"};
+  const d=await gh(FILE,{method:"PUT",body:JSON.stringify(body)});
+  sha=d.content.sha;
+  toast("✅ تم الحفظ. التغيير يظهر بالمتجر خلال دقيقة تقريباً","ok");
+  setStatus("عدد المنتجات: "+products.length);
+  return true;
+ }catch(e){
+  if(e.message==="CONFLICT"){toast("صار تعديل ثاني بنفس الوقت. اضغط 🔄 تحديث وعيد التعديل","bad");}
+  else toast(e.message,"bad");
+  setStatus("");return false;
+ }finally{busy=false}
+}
+
+function hexToRgb(h){h=h.replace("#","");return [0,2,4].map(i=>parseInt(h.substr(i,2),16)).join(",")}
+function rgbToHex(c){if(!c)return "#7b2ff7";return "#"+c.split(",").map(x=>(+x).toString(16).padStart(2,"0")).join("")}
+function priceRange(p){const v=(p.durations||[]).map(d=>d[1]);if(!v.length)return "بدون سعر";const a=Math.min(...v),b=Math.max(...v);return a===b?money(a):money(a)+" - "+money(b)}
+
+function render(){
+ const box=$("list");let html="",last=null;
+ products.forEach((p,i)=>{
+  if(p.cat!==last){html+=`<div class="catTitle">${p.cat==="player"?"▶️ مشغلات":"📺 خدمات IPTV"}</div>`;last=p.cat}
+  const thumb=p.image?`<img src="${esc(p.image)}" alt="">`:esc(p.icon||"📦");
+  html+=`<div class="item${p.hidden?" hidden":""}" style="--c:${esc(p.color||"123,47,247")}">
+   <div class="thumb">${thumb}</div>
+   <div class="info"><b>${esc(p.name)}${p.hidden?" (مخفي)":""}</b><small>${priceRange(p)} · ${(p.durations||[]).length} مدة</small></div>
+   <div class="acts">
+    <button class="btn small" onclick="openForm(${i})">✏️ تعديل</button>
+    <div class="row"><button class="btn small" onclick="move(${i},-1)">⬆️</button><button class="btn small" onclick="move(${i},1)">⬇️</button></div>
+    <button class="btn small bad" onclick="del(${i})">🗑️ حذف</button>
+   </div></div>`;
+ });
+ box.innerHTML=html||'<p class="help" style="text-align:center">ماكو منتجات. اضغط ➕ منتج جديد</p>';
+}
+
+async function move(i,dir){
+ const j=i+dir;if(j<0||j>=products.length)return;
+ [products[i],products[j]]=[products[j],products[i]];render();
+ if(!await publish("ترتيب المنتجات"))load();
+}
+async function del(i){
+ if(!confirm("متأكد تريد تحذف \""+products[i].name+"\"؟"))return;
+ const name=products[i].name;products.splice(i,1);render();
+ if(!await publish("حذف منتج: "+name))load();
+}
+
+/* ===== الفورم ===== */
+function addDur(name,price){
+ const d=document.createElement("div");d.className="dur";
+ d.innerHTML=`<input list="durNames" placeholder="المدة" value="${esc(name||"")}"><input type="number" inputmode="numeric" placeholder="السعر" value="${price!=null?price:""}"><button class="btn small bad" onclick="this.parentNode.remove()">✕</button>`;
+ $("durs").appendChild(d);
+}
+function openForm(i){
+ editIndex=(i===undefined)?-1:i;pendingImage=null;
+ const p=editIndex>=0?products[editIndex]:{cat:"iptv",icon:"📺",types:["movie","sport","live"],durations:[["شهر",5000],["3 أشهر",10000],["6 أشهر",15000],["سنة",25000]],devices:"Smart TV • Android TV • Android • iPhone • iPad • Laptop"};
+ $("formTitle").textContent=editIndex>=0?"تعديل: "+p.name:"منتج جديد";
+ $("f_name").value=p.name||"";$("f_cat").value=p.cat||"iptv";$("f_icon").value=p.icon||"";
+ $("f_badge").value=p.badge||"";$("f_desc").value=p.desc||"";$("f_details").value=p.details||"";
+ $("f_devices").value=p.devices||"";$("f_download").value=p.download||"";$("f_downloader").value=p.downloader||"";
+ $("f_color").value=rgbToHex(p.color);$("f_newUntil").value=p.newUntil||"";$("f_hidden").checked=!!p.hidden;
+ ["movie","sport","live"].forEach(t=>$("t_"+t).checked=(p.types||[]).includes(t));
+ $("durs").innerHTML="";(p.durations||[]).forEach(d=>addDur(d[0],d[1]));if(!(p.durations||[]).length)addDur();
+ $("f_image").value="";
+ const pr=$("imgPreview");
+ if(p.image){pr.src=p.image;pr.style.display="block";$("imgHint").textContent="الصورة الحالية. اختار صورة جديدة إذا تريد تغيّرها."}
+ else{pr.style.display="none";$("imgHint").textContent=""}
+ $("modal").style.display="block";$("modal").scrollTop=0;
+}
+function closeForm(){$("modal").style.display="none"}
+
+function pickImage(input){
+ const f=input.files&&input.files[0];if(!f)return;
+ const img=new Image();const url=URL.createObjectURL(f);
+ img.onload=()=>{
+  const max=480;let w=img.width,h=img.height;
+  if(w>max){h=Math.round(h*max/w);w=max}
+  const c=document.createElement("canvas");c.width=w;c.height=h;
+  c.getContext("2d").drawImage(img,0,0,w,h);
+  pendingImage=c.toDataURL("image/jpeg",0.82);
+  $("imgPreview").src=pendingImage;$("imgPreview").style.display="block";
+  $("imgHint").textContent="الصورة راح تنرفع لما تضغط حفظ";
+  URL.revokeObjectURL(url);
+ };
+ img.onerror=()=>toast("ما كدرت أقرأ الصورة","bad");
+ img.src=url;
+}
+
+function makeId(name){
+ let s=name.toLowerCase().replace(/[^a-z0-9]+/g,"").slice(0,20);
+ if(!s||products.some(p=>p.id===s))s="p"+Date.now().toString(36);
+ return s;
+}
+
+async function saveForm(){
+ const name=$("f_name").value.trim();
+ if(!name){toast("اكتب اسم المنتج","bad");return}
+ const durations=[];
+ for(const row of $("durs").children){
+  const [n,pr]=row.querySelectorAll("input");
+  const label=n.value.trim();let price=Number(pr.value);
+  if(!label&&!pr.value)continue;
+  if(!label||!(price>0)){toast("كل مدة لازم إلها اسم وسعر","bad");return}
+  if(price<1000)price=price*1000;
+  durations.push([label,Math.round(price)]);
+ }
+ if(!durations.length){toast("أضف مدة وسعر واحد على الأقل","bad");return}
+
+ const old=editIndex>=0?products[editIndex]:{};
+ const p=Object.assign({},old,{
+  id:old.id||makeId(name),name,
+  icon:$("f_icon").value.trim()||"📺",cat:$("f_cat").value,
+  badge:$("f_badge").value.trim(),desc:$("f_desc").value.trim(),details:$("f_details").value.trim(),
+  devices:$("f_devices").value.trim(),
+  types:["movie","sport","live"].filter(t=>$("t_"+t).checked),
+  durations,
+  download:$("f_download").value.trim(),downloader:$("f_downloader").value.trim(),
+  color:hexToRgb($("f_color").value)
+ });
+ const nu=$("f_newUntil").value;if(nu)p.newUntil=nu;else delete p.newUntil;
+ if($("f_hidden").checked)p.hidden=true;else delete p.hidden;
+ ["badge","desc","details","devices","download","downloader"].forEach(k=>{if(!p[k])delete p[k]});
+ if(!p.types.length)p.types=["live"];
+
+ $("saveBtn").disabled=true;
+ try{
+  if(pendingImage){
+   setStatus("⏳ جاري رفع الصورة...");
+   const path="images/"+p.id+"-"+Date.now().toString(36)+".jpg";
+   await gh(path,{method:"PUT",body:JSON.stringify({message:"صورة منتج: "+name,content:pendingImage.split(",")[1],branch:"main"})});
+   p.image=path;
+  }
+  const backup=JSON.stringify(products);
+  if(editIndex>=0)products[editIndex]=p;
+  else{
+   // المنتج الجديد ينضاف بآخر قسمه
+   let at=products.length;for(let k=products.length-1;k>=0;k--){if(products[k].cat===p.cat){at=k+1;break}}
+   products.splice(at,0,p);
+  }
+  if(await publish((editIndex>=0?"تعديل منتج: ":"منتج جديد: ")+name)){closeForm();render()}
+  else{products=JSON.parse(backup)}
+ }catch(e){toast(e.message,"bad");setStatus("")}
+ finally{$("saveBtn").disabled=false}
+}
+
+if(token)load();else $("login").style.display="block";
+</script>
+</body>
+</html>

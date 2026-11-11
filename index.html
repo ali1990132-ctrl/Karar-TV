@@ -563,7 +563,7 @@ select{width:100%;border:1px solid var(--line);background:#080b12;color:#fff;bor
 
 <script>
 /* PRODUCTS */
-const products=[
+let products=[
 {id:"kara",name:"كارة ستور TV",icon:"👑",cat:"iptv",badge:"🔥 الأكثر طلباً",desc:"خدمة IPTV متكاملة للمشاهدة والترفيه.",details:"خدمة كارة ستور TV للمشاهدة والترفيه مع مدد متعددة.",devices:"LG • Samsung • Hisense • Android TV • Google TV • Android • iPhone • iPad • Laptop",types:["movie","sport","live"],durations:[["شهر",5000],["3 أشهر",10000],["6 أشهر",15000],["سنة",25000]],download:"https://aftv.news/2437775",downloader:"2437775",color:"234,179,8"},
 {id:"moatamad",name:"المعتمد TV",icon:"⭐",cat:"iptv",badge:"⭐ مميز",desc:"اشتراك IPTV للمشاهدة والترفيه.",details:"خدمة مشاهدة وترفيه بمدد اشتراك متعددة.",devices:"Android TV • Smart TV • Android • iPhone • iPad • Laptop",types:["movie","sport","live"],durations:[["شهر",5000],["3 أشهر",10000],["6 أشهر",15000],["سنة",25000]],download:"https://aftv.news/3184973",downloader:"3184973",color:"249,115,22"},
 {id:"dream",name:"Dream OTT",icon:"🌙",cat:"iptv",badge:"🎬 ترفيه",desc:"خدمة OTT للمشاهدة.",details:"Dream OTT بخيارات اشتراك متعددة.",devices:"Android TV • Smart TV • Android • iPhone • iPad • Laptop",types:["movie","live"],durations:[["شهر",5000],["3 أشهر",10000],["6 أشهر",15000],["سنة",20000]],download:"https://bit.ly/dreamott38",downloader:"2792643",color:"168,85,247"},
@@ -1136,6 +1136,7 @@ function filterProducts(){
  document.querySelectorAll(".product").forEach(el=>{
   const id=el.dataset.id;
   const p=products.find(x=>x.id===id);
+  if(!p)return;
   const searchOK=!q||p.name.toLowerCase().includes(q);
   const catOK=activeCat==="all"||p.cat===activeCat||(activeCat==="offers"&&p.badge);
   const watchOK=activeWatch==="all"||p.types.includes(activeWatch);
@@ -1420,14 +1421,33 @@ function maybeShowIosBanner(){
 
 /* TOP LOADING BAR */
 const loadBar=document.getElementById("loadBar");
-setTimeout(()=>{loadBar.style.width="70%";},50);
+setTimeout(()=>{if(loadBar)loadBar.style.width="70%";},50);
 window.addEventListener("load",()=>{
+ if(!loadBar)return;
  loadBar.style.width="100%";
  setTimeout(()=>{loadBar.classList.add("done");},300);
 });
 
 /* INIT */
 renderProducts();
+/* المنتجات من products.json (تنعدل من لوحة الأدمن) */
+function loadRemoteProducts(){
+ fetch("products.json?t="+Date.now(),{cache:"no-store"})
+  .then(r=>r.ok?r.json():null)
+  .then(d=>{
+   if(!Array.isArray(d)||!d.length)return;
+   products=d.filter(p=>!p.hidden);
+   renderProducts();
+   try{filterProducts();}catch(e){}
+  }).catch(()=>{});
+}
+loadRemoteProducts();
+/* لوحة الأدمن: اضغط على الشعار 5 مرات */
+(function(){
+ let n=0,t;const l=document.querySelector(".logo");
+ if(!l)return;
+ l.addEventListener("click",()=>{n++;clearTimeout(t);t=setTimeout(()=>{n=0},1500);if(n>=5){n=0;location.href="admin.html";}});
+})();
 renderFaq();
 renderReviews();
 updateCartCount();
@@ -1466,13 +1486,23 @@ st.textContent=`
 document.head.appendChild(st);
 
 /* أيقونات المنتجات */
+function imgFor(id){
+ if(IMG[id])return IMG[id];
+ const p=(typeof products!=="undefined")&&products.find(x=>x.id===id);
+ return p&&p.image?p.image:null;
+}
+function applyIcons(){
 document.querySelectorAll(".product").forEach(el=>{
- const src=IMG[el.dataset.id];
+ const src=el.dataset.id&&imgFor(el.dataset.id);
  const box=el.querySelector(".productIcon");
  if(!src||!box)return;
  box.classList.add("hasImg");
  box.innerHTML='<img alt="" loading="lazy" src="'+src+'">';
 });
+}
+applyIcons();
+const oldRender=window.renderProducts;
+window.renderProducts=function(){oldRender();applyIcons();};
 
 /* الأكثر طلباً */
 document.querySelectorAll(".feature").forEach(el=>{
@@ -1488,7 +1518,7 @@ document.querySelectorAll(".feature").forEach(el=>{
 const oldDetails=window.details;
 window.details=function(id){
  oldDetails(id);
- const src=IMG[id];
+ const src=imgFor(id);
  const top=document.querySelector("#detailsContent > div");
  if(src&&top)top.outerHTML='<img class="detailsImg" alt="" src="'+src+'">';
 };

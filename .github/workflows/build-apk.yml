@@ -150,6 +150,7 @@ jobs:
           import android.net.Uri;
           import android.os.Bundle;
           import android.view.KeyEvent;
+          import android.webkit.ValueCallback;
           import android.webkit.WebChromeClient;
           import android.webkit.WebSettings;
           import android.webkit.WebView;
@@ -158,6 +159,8 @@ jobs:
           public class MainActivity extends Activity {
               private static final String HOME = "https://ali1990132-ctrl.github.io/Karar-TV/";
               private WebView web;
+              private ValueCallback<Uri[]> fileCallback;
+              private static final int FILE_REQUEST = 1;
 
               @Override
               protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +176,21 @@ jobs:
                   s.setUseWideViewPort(true);
                   s.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
 
-                  web.setWebChromeClient(new WebChromeClient());
+                  // رفع الملفات (صور المنتجات ووصل التحويل)
+                  web.setWebChromeClient(new WebChromeClient() {
+                      @Override
+                      public boolean onShowFileChooser(WebView view, ValueCallback<Uri[]> callback, FileChooserParams params) {
+                          if (fileCallback != null) fileCallback.onReceiveValue(null);
+                          fileCallback = callback;
+                          try {
+                              startActivityForResult(params.createIntent(), FILE_REQUEST);
+                          } catch (ActivityNotFoundException e) {
+                              fileCallback = null;
+                              return false;
+                          }
+                          return true;
+                      }
+                  });
                   web.setWebViewClient(new WebViewClient() {
                       @Override
                       public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -228,6 +245,16 @@ jobs:
                   } catch (ActivityNotFoundException e) {
                       // لا يوجد تطبيق يفتح هذا الرابط
                   }
+              }
+
+              @Override
+              protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+                  if (requestCode == FILE_REQUEST && fileCallback != null) {
+                      fileCallback.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode, data));
+                      fileCallback = null;
+                      return;
+                  }
+                  super.onActivityResult(requestCode, resultCode, data);
               }
 
               @Override
