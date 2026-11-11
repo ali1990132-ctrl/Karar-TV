@@ -434,6 +434,40 @@
   "image": "images/pmwcnah6q-mwcnah6s.jpg"
  },
  {
+  "id": "karatvpro",
+  "name": "Kara TV Pro",
+  "icon": "📺",
+  "cat": "iptv",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    25000
+   ]
+  ],
+  "download": "https://aftv.news/2437775",
+  "downloader": "2437775",
+  "color": "255,0,0",
+  "image": "images/karatvpro-mwcpo51b.jpg"
+ },
+ {
   "id": "ibo",
   "name": "IBO PLAYER",
   "icon": "▶️",
