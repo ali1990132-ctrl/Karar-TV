@@ -108,7 +108,7 @@ jobs:
           cat > app/src/main/res/values/strings.xml <<'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <resources>
-              <string name="app_name">كارة ستور</string>
+              <string name="app_name">متجر كارة</string>
           </resources>
           EOF
 
@@ -259,6 +259,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: apk-v${{ github.run_number }}
-          name: كارة ستور APK v1.${{ github.run_number }}
+          name: متجر كارة APK v1.${{ github.run_number }}
           files: KaraStore.apk
           make_latest: true
