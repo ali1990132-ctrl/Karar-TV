@@ -399,6 +399,41 @@
   "color": "124,58,237"
  },
  {
+  "id": "pmwcnah6q",
+  "name": "فتوش ولؤلؤ",
+  "icon": "📺😍",
+  "cat": "iptv",
+  "badge": "🥰",
+  "devices": "Smart TV • Android TV • Android • iPhone • iPad • Laptop",
+  "types": [
+   "movie",
+   "sport",
+   "live"
+  ],
+  "durations": [
+   [
+    "شهر",
+    5000
+   ],
+   [
+    "3 أشهر",
+    10000
+   ],
+   [
+    "6 أشهر",
+    15000
+   ],
+   [
+    "سنة",
+    25000
+   ]
+  ],
+  "download": "https://aftv.news/5449684",
+  "downloader": "5449684",
+  "color": "255,0,255",
+  "image": "images/pmwcnah6q-mwcnah6s.jpg"
+ },
+ {
   "id": "ibo",
   "name": "IBO PLAYER",
   "icon": "▶️",
